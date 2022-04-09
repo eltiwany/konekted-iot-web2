@@ -1,0 +1,6 @@
+.bg-login {
+  background-image: url('src/assets/images/signin.svg');
+  background-size: contain;
+  background-origin: content-box;
+  background-repeat: no-repeat;
+}

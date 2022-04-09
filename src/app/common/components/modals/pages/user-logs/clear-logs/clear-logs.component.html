@@ -1,0 +1,26 @@
+<p>
+  Are you sure you want to clear user logs? <br>
+  Logs are used to keep track of user actions, proceed with caution.
+</p>
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div class="form-floating mb-3">
+    <input
+      formControlName="date"
+      [class.invalid]="date?.touched && date?.invalid"
+      type="date"
+      class="form-control"
+      id="floatingDate"
+      placeholder="Clear All Logs Before"
+    >
+    <label for="floatingDate">Clear All Logs Before</label>
+    <p class="text-danger font-weight-bold p-0 m-0" *ngIf="date?.touched && date?.invalid">{{ date?.errors?.message }}</p>
+  </div>
+  <button
+    class="w-100 btn btn-lg btn-danger"
+    [class.disabled]="form.invalid"
+    [type]="form.valid ? 'submit' : 'button'"
+    >
+    Clear
+    <i class="bi bi-trash"></i>
+  </button>
+</form>

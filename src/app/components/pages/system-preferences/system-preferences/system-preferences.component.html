@@ -1,0 +1,136 @@
+<app-top-bar></app-top-bar>
+
+<div class="card p-3">
+  <form [formGroup]="form">
+
+    <!--   G E N E R A L      D E T A I L S    -->
+
+    <div class="col-12 mt-3 mb-3">
+      <h5 class="font-weight-750">General Preferences</h5>
+      <hr>
+    </div>
+
+    <!-- IT Support Number -->
+    <div class="row mb-3">
+      <div class="col-md-4">
+        <p class="event_desc">IT Support Number</p>
+      </div>
+      <div class="col-md-8">
+          <input
+            (change)="updatePreference('itSupport')"
+            formControlName="itSupport"
+            [class.invalid]="form.get('itSupport')?.touched && form.get('itSupport')?.invalid"
+            type="text"
+            class="form-control"
+            id="floatingOrganizationName"
+            placeholder="IT Support Number"
+          >
+          <p class="text-danger font-weight-bold p-0 m-0" *ngIf="form.get('itSupport')?.touched && form.get('itSupport')?.invalid">{{ form.get('itSupport')?.errors?.message }}</p>
+      </div>
+    </div>
+
+     <!--   O R G A N I Z A T I O N      D E T A I L S    -->
+
+    <div class="col-12 mb-3">
+      <h5 class="font-weight-750">Organization Preferences</h5>
+      <hr>
+    </div>
+
+    <!-- Organization Logo -->
+    <div class="row mb-3">
+      <div class="col-md-8">
+        <p class="event_desc">
+          Organization Logo<br>
+          <small>
+            <i>
+              <i class="bi bi-caret-right-fill me-2"></i>
+              Logo should be less than 1MB in size<br>
+              <i class="bi bi-caret-right-fill me-2"></i>
+              Supported format: png, jpg, jpeg, gif, bmp, svg
+            </i>
+          </small>
+        </p>
+      </div>
+      <div class="col-md-4">
+        <div>
+          <!-- No image selected and no image has been uploaded -->
+          <label for="organizationLogo" class="text-right w-100 pointer" *ngIf="!imageFile?.file && !form.get('organizationLogo')?.value">
+            <img class="preview-image" [src]="config.preferences.imageSelector">
+            <br>
+            <label class="image-label">
+              <b><small>Click to Upload</small></b>
+            </label>
+          </label>
+
+          <!-- Selected Image Preview -->
+          <label *ngIf="imageFile?.file" class="text-right w-100 pointer">
+            <img class="preview-image" [src]="imageFile?.link">
+            <br>
+            <button class="btn btn-primary btn-sm mt-2 image-label" type="button" (click)="updatePreferenceFiles('organizationLogo')">
+              <i class="bi bi-cloud-arrow-up-fill me-2"></i>
+              Upload Logo
+            </button>
+          </label>
+
+          <!-- Show Uploaded Image -->
+          <label *ngIf="!imageFile?.file && form.get('organizationLogo')?.value" for="organizationLogo" class="text-right w-100 pointer">
+            <img class="preview-image" [src]="api.storageHost + form.get('organizationLogo')?.value">
+            <br>
+            <button class="btn btn-danger btn-sm mt-2 image-label" type="button" (click)="removePreference('organizationLogo')">
+              <i class="bi bi-trash me-2"></i>
+              Remove Logo
+            </button>
+          </label>
+          <input type="file" id="organizationLogo" (change)="imagesPreview($event)" style="display: none;">
+      </div>
+          <p class="text-danger font-weight-bold p-0 m-0" *ngIf="form.get('organizationLogo')?.touched && form.get('organizationLogo')?.invalid">{{ form.get('organizationLogo')?.errors?.message }}</p>
+      </div>
+    </div>
+
+    <!-- Organization Name -->
+    <div class="row mb-3">
+      <div class="col-md-4">
+        <p class="event_desc">Organization Name</p>
+      </div>
+      <div class="col-md-8">
+          <input
+            (change)="updatePreference('organizationName')"
+            formControlName="organizationName"
+            [class.invalid]="form.get('organizationName')?.touched && form.get('organizationName')?.invalid"
+            type="text"
+            class="form-control"
+            id="floatingOrganizationName"
+            placeholder="Organization Name"
+          >
+          <p class="text-danger font-weight-bold p-0 m-0" *ngIf="form.get('organizationName')?.touched && form.get('organizationName')?.invalid">{{ form.get('organizationName')?.errors?.message }}</p>
+      </div>
+    </div>
+
+    <!-- System Name -->
+    <div class="row mb-3">
+      <div class="col-md-4">
+        <p class="event_desc">System Name</p>
+      </div>
+      <div class="col-md-8">
+          <input
+            (change)="updatePreference('systemName')"
+            formControlName="systemName"
+            [class.invalid]="form.get('systemName')?.touched && form.get('systemName')?.invalid"
+            type="text"
+            class="form-control"
+            id="floatingSystemName"
+            placeholder="System Name (Example: SHIPCO HRM)"
+          >
+          <p class="text-danger font-weight-bold p-0 m-0" *ngIf="form.get('systemName')?.touched && form.get('organizationName')?.invalid">{{ form.get('organizationName')?.errors?.message }}</p>
+      </div>
+    </div>
+
+    <!--   F I N A N C I A L      D E T A I L S    -->
+
+    <div class="col-12 mt-3 mb-3">
+      <h5 class="font-weight-750">Other Preferences</h5>
+      <hr>
+    </div>
+
+  </form>
+</div>

@@ -1,0 +1,205 @@
+<nav class="navbar navbar-dark navbar-theme-primary px-4 col-12 d-lg-none">
+  <a class="navbar-brand me-lg-5" routerLink="">
+      <img class="navbar-brand-dark" [src]="config.app.logoUrl" alt="Nafuu HRM logo"> <img class="navbar-brand-light" src="../../assets/img/brand/dark.svg" alt="Nafuu HRM logo">
+  </a>
+  <div class="d-flex align-items-center">
+      <button class="navbar-toggler d-lg-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+  </div>
+</nav>
+
+<!-- Start mobile menu -->
+<nav id="sidebarMenu" class="sidebar d-lg-block bg-gray-800 text-white collapse simplebar-scrollable-y" [class.contracted]="!toggle.open" data-simplebar>
+<div class="sidebar-inner px-4 pt-3">
+  <div class="user-card d-flex d-md-none align-items-center justify-content-between justify-content-md-center pb-4">
+    <div class="d-flex align-items-center">
+      <div class="d-block">
+        <h2 class="h5 mb-3">Hi, {{ auth.getAuth().fullName }}</h2>
+        <a (click)="commonAuth.logout()" class="btn btn-secondary btn-sm d-inline-flex align-items-center">
+          <svg class="icon icon-xxs me-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
+          Logout
+        </a>
+      </div>
+    </div>
+    <div class="collapse-close d-md-none">
+      <a href="#sidebarMenu" data-bs-toggle="collapse"
+          data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="true"
+          aria-label="Toggle navigation">
+          <svg class="icon icon-xs" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+        </a>
+    </div>
+  </div>
+  <!-- End mobile menu -->
+
+  <!-- Start of side menu  -->
+  <ul class="nav flex-column pt-3 pt-md-0">
+    <li class="nav-item">
+      <a routerLink="" class="nav-link d-flex align-items-center">
+        <span class="sidebar-icon">
+          <img [src]="config.app.logoUrl" width="35" alt="Volt Logo">
+          <!-- <i class="bi bi-people-fill"></i> -->
+        </span>
+        <span class="mt-1 ms-1 sidebar-text">{{ config.app.name }}</span>
+      </a>
+    </li>
+
+    <!-- Separator -->
+    <li role="separator" class="dropdown-divider mt-3 mb-3 border-gray-700"></li>
+
+    <!-- Dashboard -->
+    <li *ngIf="permissions.isAllowedPath(['dashboard'])" class="nav-item" routerLinkActive="active">
+      <a routerLink="/dashboard" class="nav-link">
+        <span class="sidebar-icon">
+          <i class="icon icon-xs me-2 bi bi-speedometer"></i>
+        </span>
+        <span class="sidebar-text">Dashboard</span>
+      </a>
+    </li>
+
+    <!-- Users -->
+    <li *ngIf="permissions.isAllowedPath(['users'])" class="nav-item" routerLinkActive="active">
+      <a routerLink="users" class="nav-link">
+        <span class="sidebar-icon">
+          <i class="icon icon-xs bi bi-people-fill me-2"></i>
+        </span>
+        <span class="sidebar-text">Users</span>
+      </a>
+    </li>
+
+    <!-- My Area -->
+    <li *ngIf="permissions.isAllowedPath(myAreaRoutes)" class="nav-item" routerLinkActive="active">
+      <span
+        [class.collapsed]="!router.isActive('my-area', false)"
+        class="nav-link d-flex justify-content-between align-items-center"
+        data-bs-toggle="collapse" data-bs-target="#submenu-my-area"
+        [attr.aria-expanded]="router.isActive('my-area', false)">
+        <span>
+          <span class="sidebar-icon">
+            <i class="icon icon-xs me-2 bi bi-person-badge-fill"></i>
+          </span>
+          <span class="sidebar-text">My Area</span>
+        </span>
+        <span class="link-arrow">
+          <svg class="icon icon-sm" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
+        </span>
+      </span>
+      <div class="multi-level collapse " role="list"
+        id="submenu-my-area" aria-expanded="false"
+        [class.show]="router.isActive('my-area', false)">
+
+        <!-- Submenus -->
+        <ul class="flex-column nav">
+          <!-- MY user INFORMATIONS -->
+          <li *ngIf="permissions.isAllowedPath(['my-profile'])" class="nav-item" routerLinkActive="active">
+            <a class="nav-link" routerLink="/my-area/my-profile">
+              <span class="sidebar-icon">
+                <i class="bi bi-person-circle"></i>
+              </span>
+              <span class="sidebar-text">User Info.</span>
+            </a>
+          </li>
+          <!-- CHANGE PASSWORD -->
+          <li *ngIf="permissions.isAllowedPath(['change-password'])" class="nav-item" routerLinkActive="active">
+            <a class="nav-link" routerLink="/my-area/change-password">
+              <span class="sidebar-icon">
+                <i class="bi bi-gear-fill"></i>
+              </span>
+              <span class="sidebar-text">Change Password</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </li>
+
+    <!-- Separator -->
+    <li role="separator" class="dropdown-divider mt-3 mb-3 border-gray-700"></li>
+
+    <!-- System Settings -->
+    <li *ngIf="permissions.isAllowedPath(settingsRoutes)" class="nav-item" routerLinkActive="active">
+      <span
+        [class.collapsed]="!router.isActive('settings', false)"
+        class="nav-link d-flex justify-content-between align-items-center"
+        data-bs-toggle="collapse" data-bs-target="#submenu-components"
+        [attr.aria-expanded]="router.isActive('settings', false)">
+        <span>
+          <span class="sidebar-icon">
+            <i class="icon icon-xs me-2 bi bi-gear-fill"></i>
+          </span>
+          <span class="sidebar-text">Settings</span>
+        </span>
+        <span class="link-arrow">
+          <svg class="icon icon-sm" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
+        </span>
+      </span>
+      <div class="multi-level collapse " role="list"
+        id="submenu-components" aria-expanded="false"
+        [class.show]="router.isActive('settings', false)">
+
+        <!-- Submenus -->
+        <ul class="flex-column nav">
+          <!-- PAGE ACCESS -->
+          <li *ngIf="permissions.isAllowedPath(['page-access'])" class="nav-item" routerLinkActive="active">
+            <a class="nav-link" routerLink="/settings/page-access">
+              <span class="sidebar-icon">
+                <i class="bi bi-file-break-fill"></i>
+              </span>
+              <span class="sidebar-text">Page Access</span>
+            </a>
+          </li>
+          <li *ngIf="permissions.isAllowedPath(['permissions'])" class="nav-item" routerLinkActive="active">
+            <a class="nav-link" routerLink="/settings/permissions">
+              <span class="sidebar-icon">
+                <i class="bi bi-key-fill"></i>
+              </span>
+              <span class="sidebar-text">Permissions</span>
+            </a>
+          </li>
+          <li *ngIf="permissions.isAllowedPath(['roles'])" class="nav-item" routerLinkActive="active">
+            <a class="nav-link" routerLink="/settings/roles">
+              <span class="sidebar-icon">
+                <i class="bi bi-shield-lock-fill"></i>
+              </span>
+              <span class="sidebar-text">Roles</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </li>
+
+    <!-- Preferences -->
+    <li *ngIf="permissions.isAllowedPath(['system-preferences'])" class="nav-item" routerLinkActive="active">
+      <a routerLink="/preferences/system-preferences" class="nav-link">
+        <span class="sidebar-icon">
+          <i class="icon icon-xs me-2 bi bi-card-heading"></i>
+        </span>
+        <span class="sidebar-text">System Preferences</span>
+      </a>
+    </li>
+
+    <!-- User Logs -->
+    <li *ngIf="permissions.isAllowedPath(['user-logs'])" class="nav-item" routerLinkActive="active">
+      <a routerLink="/user-logs" class="nav-link">
+        <span class="sidebar-icon">
+          <i class="icon icon-xs me-2 bi bi-file-text-fill"></i>
+        </span>
+        <span class="sidebar-text">User Logs</span>
+      </a>
+    </li>
+
+    <!-- Separator -->
+    <li role="separator" class="dropdown-divider mt-3 mb-3 border-gray-700"></li>
+
+    <!-- App version -->
+    <li class="nav-item">
+      <label class="nav-link d-flex align-items-center bg-light text-dark font-weight-750">
+        <span class="sidebar-icon">
+          <img src="assets/images/nafuu-hrm-new.png" height="20" alt="">
+        </span>
+        <span class="mt-1 ms-1 sidebar-text">Release {{ version }}</span>
+      </label>
+    </li>
+
+  </ul>
+</div>
+</nav>

@@ -1,0 +1,15 @@
+footer a {
+  font-weight: 700 !important;
+}
+
+.text-right {
+  text-align: end !important;
+}
+
+@media (min-width: 968px) {
+  footer {
+    position: relative;
+    bottom: 0;
+    /* width: calc(100% - 290px); */
+  }
+}

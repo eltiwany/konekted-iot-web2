@@ -1,0 +1,65 @@
+<app-top-bar
+  [exportOptions]="true"
+  [newButton]="true"
+  [newButtonName]="'New User'"
+  [modalContent]="modalComponent"
+  modalRef="newModal"
+  [dataArray]="data"
+  [colsArray]="cols"
+  ></app-top-bar>
+
+<div class="card">
+  <div class="table-responsive py-4" id="htmlData" #htmlData>
+    <div class="dataTable-wrapper dataTable-loading no-footer fixed-columns">
+      <table datatable [dtOptions]="dtOptions" class="table table-flush dataTable-table" id="htmlData">
+        <thead class="thead-light">
+        <tr>
+          <th>ID</th>
+          <th>Full Name</th>
+          <th>Email</th>
+          <th>Role</th>
+          <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody *ngIf="data?.length != 0">
+        <ng-container *ngFor="let datum of  data; let i = index">
+          <tr [ngClass]="
+            datum.email == 'admin@nafuutronics.com' ?
+            'bg-danger text-white' : datum.email == 'admin@nafuuhrm.com' ?
+            'bg-warning' : ''">
+            <th>{{ datum.id }}</th>
+            <td>{{ datum.full_name ? datum.full_name : 'N/A' }}</td>
+            <td>{{ datum.email }}</td>
+            <td>{{ datum.role_name }}</td>
+            <td>
+              <app-action-buttons
+                [headingDelete]="'Delete User: ' + datum.email"
+                [headingEdit]="'Edit ' + datum.email"
+                [headingView]="'View ' + datum.email"
+                [modalEditContent]="modalEditComponent"
+                [editAction]="datum.email == 'admin@nafuutronics.com' || datum.email == 'admin@nafuuhrm.com' ? false : true"
+                [deleteAction]="datum.email == 'admin@nafuutronics.com' || datum.email == 'admin@nafuuhrm.com' ? false : true"
+                [resetPassword]="datum.email == 'admin@nafuutronics.com' ? false : true"
+                [modalDeleteContent]="modalDeleteComponent"
+                [modalViewContent]="modalViewComponent"
+                [modalResetContent]="modalResetComponent"
+                [data]="datum"
+              ></app-action-buttons>
+              <small class="font-weight-750 text-italic" *ngIf="datum.email == 'admin@nafuutronics.com'">
+                (Superadmin can't be modified for security reasons)
+              </small>
+              <small class="font-weight-750 text-italic" *ngIf="datum.email == 'admin@nafuuhrm.com'">
+                (Backup admin can't be deleted)
+              </small>
+            </td>
+          </tr>
+        </ng-container>
+        <tbody *ngIf="data?.length == 0">
+          <tr>
+            <th colspan="3">No data found.</th>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

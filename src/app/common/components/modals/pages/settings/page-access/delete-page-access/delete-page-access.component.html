@@ -1,0 +1,15 @@
+<p>
+  Are you sure you wan't to delete page: <b>{{ data.name }}</b>?<br>
+  Please only delete if you know what you are doing, this will deny access on
+  every user who has permission to access this page.
+</p>
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <button
+    class="w-100 btn btn-lg btn-danger"
+    [class.disabled]="form.invalid"
+    [type]="form.valid ? 'submit' : 'button'"
+    >
+    Delete
+    <i class="bi bi-trash"></i>
+  </button>
+</form>

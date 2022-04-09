@@ -1,0 +1,22 @@
+<form class="p-1" [formGroup]="form" (ngSubmit)="onSubmit()" autocomplete="off">
+  <div class="form-floating mb-3">
+    <input
+      formControlName="pageName"
+      [class.invalid]="pageName?.touched && pageName?.invalid"
+      type="text"
+      class="form-control"
+      id="floatingInput"
+      placeholder="Page Name"
+    >
+    <label for="floatingInput">Page Name</label>
+    <p class="text-danger font-weight-bold p-0 m-0" *ngIf="pageName?.touched && pageName?.invalid">{{ pageName?.errors?.message }}</p>
+  </div>
+  <button
+    class="w-100 btn btn-lg btn-primary"
+    [class.disabled]="form.invalid"
+    [type]="form.valid ? 'submit' : 'button'"
+    >
+    Add
+    <i class="bi bi-file-earmark-plus-fill"></i>
+  </button>
+</form>

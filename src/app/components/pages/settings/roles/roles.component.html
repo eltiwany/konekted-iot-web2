@@ -1,0 +1,57 @@
+<app-top-bar
+  [exportOptions]="true"
+  [newButton]="true"
+  [newButtonName]="'New Role'"
+  [modalContent]="modalComponent"
+  modalRef="newModal"
+  [dataArray]="roles"
+  [colsArray]="cols"
+  ></app-top-bar>
+  <div class="card">
+    <div class="table-responsive py-4" id="htmlData" #htmlData>
+      <div class="dataTable-wrapper dataTable-loading no-footer fixed-columns">
+        <table datatable [dtOptions]="dtOptions" class="table table-flush dataTable-table" id="htmlData">
+          <thead class="thead-light">
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th class="text-center">Default</th>
+            <th>Actions</th>
+          </tr>
+          </thead>
+          <tbody *ngIf="roles?.length != 0">
+          <tr *ngFor="let role of  roles; let i = index">
+            <th>{{ role.id }}</th>
+            <td>{{ role.name }}</td>
+            <td *ngIf="role.is_default" class="text-center">
+              <i class="bi bi-check-lg text-success"></i>
+            </td>
+            <td *ngIf="!role.is_default" class="text-center">
+              <i class="bi bi-x-lg text-danger"></i>
+            </td>
+            <td>
+              <app-action-buttons
+                [headingDelete]="'Delete role ' + role.name"
+                [headingEdit]="'Edit ' + role.name + ' and its permissions'"
+                [headingView]="'View ' + role.name + ' and its permissions'"
+                [modalEditContent]="modalEditComponent"
+                [modalDeleteContent]="modalDeleteComponent"
+                [modalViewContent]="modalViewComponent"
+                [deleteAction]="role.name == 'admin' ? false : true"
+                [editAction]="role.name == 'admin' ? false : true"
+                [data]="role"
+              ></app-action-buttons>
+              <small class="font-weight-750 text-italic" *ngIf="role.name == 'admin'">
+                (Can't be edited/deleted for security reasons)
+              </small>
+            </td>
+          </tr>
+          <tbody *ngIf="roles?.length == 0">
+            <tr>
+              <th colspan="3">No roles found.</th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>

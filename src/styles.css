@@ -1,0 +1,158 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~bootstrap-icons/font/bootstrap-icons.css";
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i");
+
+body {
+  height: 100vh !important;
+  zoom: 90%;
+}
+
+a {
+  cursor: pointer;
+}
+
+@media (min-width: 768px) {
+  /* .v-center {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%) translateX(22%);
+  } */
+
+  .v-center {
+    /* width: 200px;
+    height: 600px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0; */
+    margin-top: 100px !important;
+    margin: auto;
+    /*Solves a problem in which the content is being cut when the div is smaller than its' wrapper:*/
+    /* max-width: 100%;
+    max-height: 100%; */
+    /* overflow: auto; */
+  }
+}
+
+.image-logo {
+  width: 400px;
+}
+
+@media (max-width: 768px) {
+  .image-logo {
+    width: 200px;
+    margin-bottom: 20px;
+  }
+}
+
+.invalid {
+  border: 2px solid rgb(255, 0, 0) !important;
+}
+
+.font-weight-bold {
+  font-weight: 500;
+}
+
+.font-weight-900 {
+  font-weight: 900 !important;
+}
+
+.font-weight-700 {
+  font-weight: 700 !important;
+}
+
+.font-weight-750 {
+  font-weight: 750 !important;
+}
+
+.w-70 {
+  width: 70% !important;
+}
+
+.w-30 {
+  width: 30% !important;
+}
+
+.text-right {
+  text-align: right;
+  margin-right: 10px !important;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.dataTables_empty {
+  display: none !important;
+}
+
+table {
+  width: 100% !important;
+}
+
+.input-centered {
+  margin: auto !important;
+  align-self: center !important;
+  display: flex;
+}
+
+.multiselect-dropdown .dropdown-btn {
+  padding: 0.75rem 0.75rem !important;
+  border: 0.0625rem solid #d1d5db !important;
+  border-radius: 0.5rem !important;
+}
+
+.alert-danger {
+  color: #87112b;
+  background-color: #f9d2da !important;
+  border-color: #f6bbc8;
+}
+
+.nav-tabs .nav-link {
+  padding: 5px 15px 5px 15px !important;
+}
+
+.nav-tabs {
+  /* border-bottom: none !important; */
+  margin-top: 20px !important;
+  border-bottom: 1px solid #dee2e6 !important;
+}
+
+.fadeIn {
+  -webkit-animation: fadein 0.5s linear forwards;
+  animation: fadein 0.5s linear forwards;
+  opacity: 0;
+}
+
+@-webkit-keyframes fadein {
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fadein {
+  100% {
+    opacity: 1;
+  }
+}
+
+@media print {
+  .pagebreak {
+    clear: both;
+    page-break-after: always;
+  }
+}
+
+.ml-3 {
+  margin: 0 !important;
+  margin-left: 10px !important;
+}
+
+/*
+  Fixing backdrop after zoomout
+*/
+.modal-backdrop {
+  width: 100% !important;
+  height: 100% !important;
+}

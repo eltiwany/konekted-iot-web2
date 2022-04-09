@@ -1,0 +1,14 @@
+<p>
+  Are you sure you want to reset password to user: <b>{{ data.email }}</b>?<br>
+  Password will go back to default <b>user12345</b>
+</p>
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <button
+    class="w-100 btn btn-lg btn-danger"
+    [class.disabled]="form.invalid"
+    [type]="form.valid ? 'submit' : 'button'"
+    >
+    Reset Password
+    <i class="bi bi-gear-wide-connected"></i>
+  </button>
+</form>

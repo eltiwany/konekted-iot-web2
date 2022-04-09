@@ -1,0 +1,42 @@
+<div class="col-12">
+  <div class="card border-0 shadow">
+      <div class="card-header">
+          <div class="row align-items-center">
+              <div class="col">
+                  <h2 class="fs-5 fw-bold mb-0">{{ cardName }}</h2>
+              </div>
+              <div class="col text-end">
+                  <a [routerLink]="allDataUrl" class="btn btn-sm btn-primary">See all</a>
+              </div>
+          </div>
+      </div>
+      <div class="table-responsive">
+          <table class="table align-items-center table-flush">
+              <thead class="thead-light">
+              <tr>
+                  <th class="border-bottom" scope="col" *ngFor="let column of columns">{{ fn.toUpperCamelCase(column.name) }}</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let datum of data">
+                  <td *ngFor="let column of columns" class="fw-bolder text-gray-900" scope="row">
+                    {{
+                      column.numberFormat == 'currency' || !datum.is_percentage ?
+                      (datum[column.name] | number) + config.preferences.currency :
+                      (
+                        column.numberFormat == 'percent' || datum.is_percentage ?
+                        (datum[column.name] | number) + "%" : datum[column.name]
+                      )
+                    }}
+                  </td>
+              </tr>
+              <tr *ngIf="data.length == 0">
+                <td class="fw-bolder text-gray-900 text-center" scope="row">
+                  No data found.
+                </td>
+            </tr>
+              </tbody>
+          </table>
+      </div>
+  </div>
+</div>

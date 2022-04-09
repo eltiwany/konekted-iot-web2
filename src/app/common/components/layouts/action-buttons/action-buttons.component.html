@@ -1,0 +1,81 @@
+<!-- View Button -->
+<button *ngIf="permission.isAllowedAction('r') && viewAction" class="btn btn-link text-tertiary m-0 p-0" placement="bottom" ngbTooltip="Edit" (click)="modal.open(modalView, modalViewSize)">
+  <i class="bi bi-eye-fill"></i>
+</button>
+<!-- Confirm Button -->
+<button *ngIf="permission.isAllowedAction('a') && confirmAction" class="btn btn-link text-dark m-0 pl-1 pr-0 pb-0 pt-0" placement="bottom" ngbTooltip="Confirm" (click)="modal.open(modalConfirm)">
+  <i class="bi bi-check2-square"></i>
+</button>
+<!-- Edit Button -->
+<button *ngIf="permission.isAllowedAction('w') && editAction" class="btn btn-link text-info m-0 pl-1 pt-0 pb-0 pr-1" placement="bottom" ngbTooltip="Edit" (click)="modal.open(modalEdit, modalEditSize)">
+  <i [class]="iconName"></i>
+</button>
+<!-- Reset Password Button -->
+<button *ngIf="permission.isAllowedAction('w') && resetPassword" class="btn btn-link text-success m-0 p-0" placement="bottom" ngbTooltip="Reset Password" (click)="modal.open(modalReset, modalResetSize)">
+  <i class="bi bi-unlock-fill"></i>
+</button>
+<!-- Delete Button -->
+<button *ngIf="permission.isAllowedAction('d') && deleteAction" [classList]="!resetPassword ? 'btn btn-link text-danger m-0 p-0' : 'btn btn-link text-danger m-0 pl-1 pr-0 pb-0 pt-0'" placement="bottom" ngbTooltip="Delete" (click)="modal.open(modalDelete, modalDeleteSize)">
+  <i class="bi bi-trash"></i>
+</button>
+
+<!-- View Modal with Dynamic Form Loading -->
+<ng-template #modalView let-modalv let-c="close" let-d="dismiss" class="p-0">
+  <div class="modal-header">
+      <h2 class="h6 modal-title">{{ headingView }}</h2>
+      <button type="button" class="btn-close" (click)="modalv.dismiss('Cross click')"></button>
+  </div>
+  <div class="modal-body">
+    <ng-container *ngComponentOutlet="modalViewContent; injector: dataInjected"></ng-container>
+  </div>
+</ng-template>
+
+<!-- Edit Modal with Dynamic Form Loading -->
+<ng-template #modalEdit let-modale let-c="close" let-d="dismiss" class="p-0">
+  <div class="modal-header">
+      <h2 class="h6 modal-title">{{ headingEdit }}</h2>
+      <button type="button" class="btn-close" (click)="modale.dismiss('Cross click')"></button>
+  </div>
+  <div class="modal-body">
+    <ng-container *ngComponentOutlet="modalEditContent; injector: dataInjected"></ng-container>
+  </div>
+</ng-template>
+
+<!-- Delete Modal with Dynamic Form Loading -->
+<ng-template #modalDelete let-modald let-c="close" let-d="dismiss" class="p-0">
+  <div class="modal-header bg-danger text-white">
+      <h2 class="h6 modal-title">{{ headingDelete }}</h2>
+      <button type="button" class="btn btn-link border-0 text-white" (click)="modald.dismiss('Cross click')">
+        <i class="bi bi-x-lg"></i>
+      </button>
+  </div>
+  <div class="modal-body">
+    <ng-container *ngComponentOutlet="modalDeleteContent; injector: dataInjected"></ng-container>
+  </div>
+</ng-template>
+
+<!-- Confirm Modal with Dynamic Form Loading -->
+<ng-template #modalConfirm let-modald let-c="close" let-d="dismiss" class="p-0">
+  <div class="modal-header bg-danger text-white">
+      <h2 class="h6 modal-title">{{ headingConfirm }}</h2>
+      <button type="button" class="btn btn-link border-0 text-white" (click)="modald.dismiss('Cross click')">
+        <i class="bi bi-x-lg"></i>
+      </button>
+  </div>
+  <div class="modal-body">
+    <ng-container *ngComponentOutlet="modalConfirmContent; injector: dataInjected"></ng-container>
+  </div>
+</ng-template>
+
+<!-- Reset Password Modal with Dynamic Form Loading -->
+<ng-template #modalReset let-modalr let-c="close" let-d="dismiss" class="p-0">
+  <div class="modal-header bg-danger text-white">
+      <h2 class="h6 modal-title">{{ headingReset }}</h2>
+      <button type="button" class="btn btn-link border-0 text-white" (click)="modalr.dismiss('Cross click')">
+        <i class="bi bi-x-lg"></i>
+      </button>
+  </div>
+  <div class="modal-body">
+    <ng-container *ngComponentOutlet="modalResetContent; injector: dataInjected"></ng-container>
+  </div>
+</ng-template>

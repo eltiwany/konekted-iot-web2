@@ -1,0 +1,33 @@
+<app-top-bar></app-top-bar>
+<div class="alert alert-warning">
+  <i class="bi bi-exclamation-circle"></i>
+  These are the foundation of user access control, so they can only be viewed and not be modified.
+</div>
+<div class="card">
+  <div class="table-responsive py-4" id="htmlData" #htmlData>
+    <div class="dataTable-wrapper dataTable-loading no-footer fixed-columns">
+      <table datatable [dtOptions]="dtOptions" class="table table-flush dataTable-table">
+        <thead class="thead-light">
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Description</th>
+        </tr>
+        </thead>
+        <tbody *ngIf="data?.length != 0">
+        <tr *ngFor="let datum of  data; let i = index">
+          <th>{{ datum.id }}</th>
+          <td>{{ datum.name }}</td>
+          <td>{{ datum.description }}</td>
+        </tr>
+        <tbody *ngIf="data?.length == 0">
+          <tr>
+            <th colspan="3">No data found.</th>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+

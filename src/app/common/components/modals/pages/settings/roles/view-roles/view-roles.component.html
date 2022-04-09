@@ -1,0 +1,33 @@
+<div class="p-1">
+  <div class="form-floating mb-3">
+    <input
+      [value]="this.data.length == 0 ? 'Loading...' : this.data.name"
+      type="text"
+      class="form-control"
+      id="floatingInput"
+      disabled
+    >
+    <label for="floatingInput">Role Name</label>
+  </div>
+  <div class="table-responsive">
+    <table class="table table-bordered table-sm">
+      <tr>
+        <th rowspan="2">Page Name</th>
+        <th colspan="5" class="text-center">Permissions</th>
+      </tr>
+      <tr class="text-center">
+        <th *ngFor="let permission of permissions">
+          {{ fn.toUpperCamelCase(permission.description) }}
+        </th>
+      </tr>
+      <tr *ngFor="let page of pages">
+        <td>
+          {{ page.name }}
+        </td>
+        <td class="text-center" *ngFor="let permission of permissions">
+          <i class="bi bi-check-square-fill" *ngIf="isChecked(permission.id, page.id)"></i>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>

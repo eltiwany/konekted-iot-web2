@@ -1,0 +1,39 @@
+<form class="p-1" [formGroup]="form" (ngSubmit)="onSubmit()" autocomplete="off">
+  <div class="form-floating mb-3">
+    <input
+      formControlName="email"
+      [class.invalid]="email?.touched && email?.invalid"
+      type="email"
+      class="form-control"
+      id="floatingEmail"
+      placeholder="Email"
+    >
+    <label for="floatingEmail">Email</label>
+    <p class="text-danger font-weight-bold p-0 m-0" *ngIf="email?.touched && email?.invalid">{{ email?.errors?.message }}</p>
+  </div>
+  <div class="form-floating mb-3">
+    <select
+      formControlName="roleId"
+      [class.invalid]="roleId?.touched && roleId?.invalid"
+      type="text"
+      class="form-control"
+      id="floatingRole"
+      placeholder="Role"
+    >
+      <option [value]="">-- Select Role --</option>
+      <option *ngFor="let role of roles" [value]="role.id">
+        {{ role.name }}
+      </option>
+    </select>
+    <label for="floatingRole">Role</label>
+    <p class="text-danger font-weight-bold p-0 m-0" *ngIf="roleId?.touched && roleId?.invalid">{{ roleId?.errors?.message }}</p>
+  </div>
+  <button
+    class="w-100 btn btn-lg btn-success"
+    [class.disabled]="form.invalid"
+    [type]="form.valid ? 'submit' : 'button'"
+    >
+    Update
+    <i class="bi bi-check-circle-fill"></i>
+  </button>
+</form>

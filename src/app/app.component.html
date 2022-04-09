@@ -1,0 +1,24 @@
+<!-- Progress bar -->
+<ngx-loading-bar height="4px" [includeSpinner]="false"></ngx-loading-bar>
+
+<!-- Layout for authenticated user -->
+<div *ngIf="!auth.isGuest() && !loader.preloader">
+  <app-side-nav></app-side-nav>
+  <main class="content" [class.content-contracted]="toggle.open">
+    <app-top-nav></app-top-nav>
+    <router-outlet></router-outlet>
+    <app-footer></app-footer>
+  </main>
+</div>
+
+<!-- Layout for guest -->
+<div *ngIf="auth.isGuest() && !loader.preloader">
+  <main class="main-guest" id="main-guest" [ngStyle]="{'background-image': 'url(' + config.website.frontImageUrl + ')'}">
+    <router-outlet></router-outlet>
+  </main>
+</div>
+
+<!-- Layout for preloader -->
+<div *ngIf="loader.preloader">
+  <app-preloader></app-preloader>
+</div>

@@ -1,0 +1,24 @@
+<div class="container v-center col-xxl-8 px-4 py-5">
+  <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
+    <div class="col-lg-12">
+      <label for="" class="text-center w-100 mb-3">
+        <img [src]="config.app.logoUrl" alt="Nafuu HRM" class="logo">
+      </label>
+      <h1 class="display-4 lh-1 mb-3 text-center font-weight-700">{{ config.app.longName | uppercase  }}</h1>
+      <h1 class="display-5 lh-1 mb-3 text-center font-weight-700">{{ config.app.heading  }}</h1>
+      <hr>
+      <p class="lead text-center">{{ (config.app.description | lowercase) }}<p>
+      <hr>
+
+      <div class="d-grid gap-2 d-md-flex justify-content-center">
+        <a type="button" routerLink="/login" class="btn btn-primary btn-lg px-4">Start Using Now!</a>
+      </div>
+
+      <!-- Remove this code after editing -->
+      <pre class="text-center alert alert-warning mt-4">Edit initial configurations on => "src/app/common/services/app-config.service.ts"</pre>
+      <!-- End of Remove this code after editing -->
+
+    </div>
+  </div>
+</div>
+

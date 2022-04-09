@@ -1,0 +1,26 @@
+p.event_desc {
+  /* font: bold 12px "Helvetica Neue", Helvetica, Arial, sans-serif; */
+  /* line-height: 14px; */
+  margin: 0px;
+  display: table-cell;
+  vertical-align: middle;
+  padding: 10px;
+  font-weight: 700 !important;
+  font-size: 10pt !important;
+  width: 100%;
+  /* border: 1px solid #f00; */
+}
+
+h5 {
+  padding-left: 10px;
+}
+
+.preview-image {
+  width: 150px;
+  height: auto;
+}
+
+.image-label {
+  width: 150px;
+  text-align: center;
+}

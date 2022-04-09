@@ -1,0 +1,50 @@
+<form class="p-1" [formGroup]="form" (ngSubmit)="onSubmit()" autocomplete="off">
+  <div class="form-floating mb-3">
+    <input
+      formControlName="roleName"
+      [class.invalid]="roleName?.touched && roleName?.invalid"
+      type="text"
+      class="form-control"
+      id="floatingInput"
+      placeholder="Role Name"
+    >
+    <label for="floatingInput">Role Name</label>
+    <p class="text-danger font-weight-bold p-0 m-0" *ngIf="roleName?.touched && roleName?.invalid">{{ roleName?.errors?.message }}</p>
+  </div>
+
+  <!-- Is Default -->
+  <div class="form-check form-switch mb-3">
+    <input class="form-check-input" formControlName="isDefault" type="checkbox" id="isDefault">
+    <label class="form-check-label" for="isDefault">Is this the default role used when creating new users?</label>
+  </div>
+
+  <div class="table-responsive">
+    <table class="table table-bordered table-sm">
+      <tr>
+        <th rowspan="2">Page Name</th>
+        <th colspan="5" class="text-center">Permissions</th>
+      </tr>
+      <tr class="text-center">
+        <th *ngFor="let permission of permissions">
+          {{ fn.toUpperCamelCase(permission.description) }}
+        </th>
+      </tr>
+      <tr *ngFor="let page of pages">
+        <td>
+          {{ page.name }}
+        </td>
+        <td *ngFor="let permission of permissions">
+          <input (click)="handlePermissions($event, page.id)" class="input-centered" type="checkbox" [value]="permission.id">
+        </td>
+      </tr>
+    </table>
+  </div>
+  <button
+    class="w-100 btn btn-lg btn-primary"
+    [class.disabled]="form.invalid || newPermissionsArray.length == 0"
+    [type]="(form.valid || newPermissionsArray.length != 0) ? 'submit' : 'button'"
+    >
+    Add
+    <i class="bi bi-file-earmark-plus-fill"></i>
+  </button>
+</form>

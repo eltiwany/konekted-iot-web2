@@ -1,0 +1,53 @@
+<app-top-bar
+  [exportOptions]="true"
+  [newButton]="true"
+  [newButtonName]="'New Page Access'"
+  [modalContent]="modalComponent"
+  modalRef="newModal"
+  [dataArray]="data"
+  [colsArray]="cols"
+  ></app-top-bar>
+
+<div class="card">
+  <div class="table-responsive py-4" id="htmlData" #htmlData>
+    <div class="dataTable-wrapper dataTable-loading no-footer fixed-columns">
+      <table datatable [dtOptions]="dtOptions" class="table table-flush dataTable-table" id="htmlData">
+        <thead class="thead-light">
+        <tr>
+          <th>ID</th>
+          <th>Page Name</th>
+          <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody *ngIf="data?.length != 0">
+        <tr *ngFor="let datum of  data; let i = index">
+          <th>{{ datum.id }}</th>
+          <td>{{ datum.name }}</td>
+          <td>
+            <app-action-buttons
+              [headingDelete]="'Delete Page: ' + datum.name"
+              [headingEdit]="'Edit ' + datum.name"
+              [headingView]="'View ' + datum.name"
+              [modalEditContent]="modalEditComponent"
+              [modalDeleteContent]="modalDeleteComponent"
+              [modalViewContent]="modalViewComponent"
+              [data]="datum"
+              [deleteAction]="datum.name == 'All' ? false : true"
+              [editAction]="datum.name == 'All' ? false : true"
+            ></app-action-buttons>
+            <small class="font-weight-750 text-italic" *ngIf="datum.name == 'All'">
+              (Can't be edited/deleted for security reasons)
+            </small>
+          </td>
+        </tr>
+        <tbody *ngIf="data?.length == 0">
+          <tr>
+            <th colspan="3">No data found.</th>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+

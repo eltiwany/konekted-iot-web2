@@ -1,0 +1,3 @@
+.no-overflow-x, .sidebar-inner {
+  overflow-x: hidden !important;
+}
