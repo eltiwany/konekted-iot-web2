@@ -6,7 +6,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent, canActivate: [GuestGuardService]},
-  {path: 'activate-account', component: RegisterComponent, canActivate: [GuestGuardService]},
+  {path: 'register', component: RegisterComponent, canActivate: [GuestGuardService]},
 ];
 
 @NgModule({

@@ -14,6 +14,9 @@ const routes: Routes = [
   {'path': 'users', 'component': UsersComponent, canActivate: [AuthGuardService, RolesGuardService]},
   {'path': 'user-logs', 'component': UserLogsComponent, canActivate: [AuthGuardService, RolesGuardService]},
   // With Childrens
+  {'path': 'config-hardwares', loadChildren: () => import('./config-hardwares/config-hardwares.module').then(m => m.ConfigHardwaresModule), canActivateChild: [RolesGuardService]},
+  {'path': 'hardwares', loadChildren: () => import('./link-hardwares/link-hardwares.module').then(m => m.LinkHardwaresModule), canActivateChild: [RolesGuardService]},
+  {'path': 'monitor-and-control', loadChildren: () => import('./mnc-hardwares/mnc-hardwares.module').then(m => m.MncHardwaresModule), canActivateChild: [RolesGuardService]},
   {'path': 'settings', loadChildren: () => import('./settings/settings.module').then(m => m.SettingsModule), canActivateChild: [RolesGuardService]},
   {'path': 'my-area', loadChildren: () => import('./my-area/my-area.module').then(m => m.MyAreaModule), canActivateChild: [RolesGuardService]},
   {'path': 'preferences', loadChildren: () => import('./system-preferences/system-preferences.module').then(m => m.SystemPreferencesModule), canActivateChild: [RolesGuardService]},

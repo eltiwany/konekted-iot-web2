@@ -1,0 +1,18 @@
+<app-top-bar
+  [exportOptions]="false"
+  [newButton]="false"
+></app-top-bar>
+
+<div class="row">
+  <div class="col col-md-3" *ngFor="let datum of data">
+    <app-control-device-card
+      [imageUrl]="api.storageHost + datum.actuator.image_url"
+      [isImage]="true"
+      [color]="'success'"
+      [deviceName]="datum.actuator.user_defined_name ?? datum.actuator.name"
+      [deviceId]="datum.actuator.id"
+      [isSwitchedOn]="datum.actuator.is_switched_on"
+    ></app-control-device-card>
+  </div>
+
+</div>

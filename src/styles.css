@@ -156,3 +156,81 @@ table {
   width: 100% !important;
   height: 100% !important;
 }
+
+body::-webkit-scrollbar {
+  width: .3em;
+
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: rgba(70, 79, 229);
+  outline: 1px solid #fff;
+}
+
+.h-100 {
+  height: 100% !important;
+}
+
+.modal-body {
+  zoom: 0.8 !important;
+  /* font-size: 80% !important; */
+}
+
+.card-icon2 {
+  font-weight: 900;
+  font-size: 100pt;
+  margin: 0 !important;
+}
+
+.icon-shape {
+  width: 100% !important;
+  height: 200px !important;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.table-sm th, .table-sm td {
+  padding: 5px !important;
+}
+
+.h-card-fixed {
+  min-height: 480px !important;
+}
+
+.card-link-device {
+  height: 140px !important;
+  display: flex;
+  align-items: center;
+  text-align: center;
+}
+
+.content-center {
+  display: flex;
+  /* font-size: 100pt; */
+  flex-direction: row;
+  flex-wrap: nowrap;
+  height: 100% !important;
+  align-items: center;
+  justify-content: center;
+}
+
+.rotate-90 {
+  transform: rotate(90deg);
+}
+
+.float-right {
+  float: right !important;
+}
+
+.clear-both {
+  clear: both !important;
+}
+
+.p-0 {
+  padding: 0 !important;
+}
+
+.w-full {
+  width: 100% !important;
+}

@@ -1,0 +1,51 @@
+<app-top-bar
+  [exportOptions]="false"
+  [newButton]="false"
+></app-top-bar>
+
+<div class="row">
+  <div class="col col-md-3" *ngFor="let datum of data">
+    <app-hardware-list-card
+      [imageUrl]="api.storageHost + datum.sensor.image_url"
+      [isImage]="true"
+      [link]="false"
+      [textButton]="true"
+      [showStatus]="false"
+      [deleteAction]="true"
+      [color]="'warning'"
+      [modalSize]="'lg'"
+      [modalContent]="modalViewComponent"
+      [modalDeleteContent]="modalDeleteComponent"
+      headingDelete="Unlink Sensor"
+      [deviceName]="datum.sensor.user_defined_name ?? datum.sensor.name"
+      [interval]="datum.sensor.interval"
+      [data]="datum"
+      [connections]="datum.connections"
+      [columns]="datum.columns"
+    ></app-hardware-list-card>
+  </div>
+
+  <div class="col col-md-3" *ngIf="data.length != 0">
+    <app-hardware-list-card
+      [modalSize]="'lg'"
+      [color]="'warning'"
+      heading="Link Another Sensor"
+      [modalContent]="modalComponent"
+      [linkMessage]="'Click the plus icon to link another device.'"
+      [iconName]="'node-plus-fill'"
+      [data]="data"
+    ></app-hardware-list-card>
+  </div>
+
+  <div class="col col-md-3" *ngIf="data.length == 0">
+    <app-hardware-list-card
+      [modalSize]="'lg'"
+      [color]="'warning'"
+      heading="Link Sensor"
+      [modalContent]="modalComponent"
+      [linkMessage]="'Click the plus icon to link a device.'"
+      [iconName]="'plus-circle-fill'"
+      [data]="data"
+    ></app-hardware-list-card>
+  </div>
+</div>

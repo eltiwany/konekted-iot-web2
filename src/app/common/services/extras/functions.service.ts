@@ -6,6 +6,8 @@ import * as ntw from 'number-to-words';
   providedIn: 'root'
 })
 export class FunctionsService {
+  characters: string ='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+
   constructor(
     private config: AppConfigService
   ) {}
@@ -89,5 +91,15 @@ export class FunctionsService {
         }
       });
       return _month;
+  }
+
+  generateString(length: number) {
+      let result = ' ';
+      const charactersLength = this.characters.length;
+      for ( let i = 0; i < length; i++ ) {
+          result += this.characters.charAt(Math.floor(Math.random() * charactersLength));
+      }
+
+      return result;
   }
 }

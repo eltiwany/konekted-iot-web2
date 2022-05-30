@@ -30,10 +30,6 @@ export class TopBarComponent implements OnInit {
   dtOptions: any[] = [];
   urls: any;
 
-  form = new FormGroup({
-    sdl: new FormControl()
-  });
-
   // Accepted columns for imported file
   @Input() importColumns = [];
   // @ts-ignore
@@ -73,16 +69,9 @@ export class TopBarComponent implements OnInit {
     public url: UrlService,
     public permission: PermissionsGuardService,
     public fn: FunctionsService,
-    private preference: PreferencesService
   ) {}
 
   ngOnInit(): void {
-    if (this.sdlButton)
-      this.preference.getPreference("sdl").then((response) => {
-        if (!response.error)
-          if (response.data)
-            this.form.get('sdl')?.setValue(response.data.value);
-      });
   }
 
   refresh() {
@@ -154,19 +143,6 @@ export class TopBarComponent implements OnInit {
         }
       });
     }
-  }
-
-  updateSDL() {
-    let data = {
-      key: 'sdl',
-      value: this.form.get('sdl')?.value
-    };
-    // console.log(data);
-
-    if (this.form.valid)
-      this.preference.setPreference("sdl", data).then(()=>{
-        this.modal.close();
-      });
   }
 
 }

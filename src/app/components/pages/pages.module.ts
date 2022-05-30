@@ -8,7 +8,6 @@ import { MyCommonModule } from 'src/app/common/common.module';
 import { UsersComponent } from './users/users.component';
 import { UserLogsComponent } from './user-logs/user-logs.component';
 
-
 @NgModule({
   declarations: [
     UsersComponent,

@@ -21,9 +21,9 @@
 
 <!-- View Modal with Dynamic Form Loading -->
 <ng-template #modalView let-modalv let-c="close" let-d="dismiss" class="p-0">
-  <div class="modal-header">
+  <div class="modal-header bg-dark text-white">
       <h2 class="h6 modal-title">{{ headingView }}</h2>
-      <button type="button" class="btn-close" (click)="modalv.dismiss('Cross click')"></button>
+      <button type="button" class="btn-close bg-white" (click)="modalv.dismiss('Cross click')"></button>
   </div>
   <div class="modal-body">
     <ng-container *ngComponentOutlet="modalViewContent; injector: dataInjected"></ng-container>
@@ -32,9 +32,9 @@
 
 <!-- Edit Modal with Dynamic Form Loading -->
 <ng-template #modalEdit let-modale let-c="close" let-d="dismiss" class="p-0">
-  <div class="modal-header">
+  <div class="modal-header bg-dark text-white">
       <h2 class="h6 modal-title">{{ headingEdit }}</h2>
-      <button type="button" class="btn-close" (click)="modale.dismiss('Cross click')"></button>
+      <button type="button" class="btn-close bg-white" (click)="modale.dismiss('Cross click')"></button>
   </div>
   <div class="modal-body">
     <ng-container *ngComponentOutlet="modalEditContent; injector: dataInjected"></ng-container>

@@ -8,8 +8,6 @@ import { EditUsersComponent } from './pages/users/edit-users/edit-users.componen
 import { ResetUsersComponent } from './pages/users/reset-users/reset-users.component';
 import { ClearLogsComponent } from './pages/user-logs/clear-logs/clear-logs.component';
 
-
-
 @NgModule({
   declarations: [
     ViewUsersComponent,
@@ -17,7 +15,7 @@ import { ClearLogsComponent } from './pages/user-logs/clear-logs/clear-logs.comp
     DeleteUsersComponent,
     EditUsersComponent,
     ResetUsersComponent,
-    ClearLogsComponent
+    ClearLogsComponent,
   ],
   imports: [
     CommonModule,

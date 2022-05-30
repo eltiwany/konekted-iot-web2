@@ -38,6 +38,15 @@ export class AuthService {
   }
 
   /**
+   * Activate newely created user based on given data
+   * @param userData
+   * @returns any
+   */
+   async register(userData: object): Promise<any> {
+    return this.http.post(this.api.auth.register, userData, true);
+  }
+
+  /**
    * Set Authentication data after
    * user has successfully loggen in
    * @param userData

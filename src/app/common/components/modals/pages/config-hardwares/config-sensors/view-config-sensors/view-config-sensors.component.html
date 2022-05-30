@@ -1,0 +1,45 @@
+<div class="p-2 row">
+  <div class="col-md-4">
+    <div class="alert">
+      <img [src]="api.storageHost + data.sensor.image_url" [alt]="data.sensor.name">
+    </div>
+  </div>
+  <div class="col-md-8 table-responsive">
+    <div class="alert">
+      <h4 class="font-weight-900 alert-dark text-center rounded p-2 mb-3">{{ data.sensor.name }}</h4>
+      <h6 class="font-weight-750 m-0">Description</h6>
+      <hr style="margin: 0.25rem 0 !important;">
+      <p>{{ data.sensor.description }}</p>
+      <h6 class="font-weight-750 m-0">Sensor Pins</h6>
+      <hr style="margin: 0.25rem 0 !important;">
+      <table class="table table-centered bg-white table-nowrap table-borderless mb-0">
+        <tbody>
+          <tr *ngFor="let pin of data.pinTypes">
+            <th class="p-1">{{ pin.pin_type }}</th>
+            <td class="p-1">
+              <span *ngFor="let type of filterPins(data.pins, pin.pin_type)" class="badge bg-dark mx-1">
+                {{ type.pin_number }}
+              </span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <br>
+      <h6 class="font-weight-750 m-0">Columns (Expected Result)</h6>
+      <hr style="margin: 0.25rem 0 !important;">
+      <table class="table table-centered bg-white table-nowrap table-borderless mb-0">
+        <tbody>
+          <tr>
+            <th class="p-1">Columns</th>
+            <td class="p-1">
+              <span *ngFor="let column of data.columns" class="badge bg-info mx-1">
+                {{ column.column }}
+              </span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

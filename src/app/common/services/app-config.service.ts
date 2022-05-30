@@ -1,6 +1,6 @@
 import { ApiService } from './api/api.service';
 import { PreferencesService } from './preferences.service';
-import { Injectable, OnChanges } from '@angular/core';
+import { Injectable, OnChanges, SimpleChanges } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +11,11 @@ export class AppConfigService {
     private preference: PreferencesService,
     private api: ApiService
   ) {
+    this.getPreferences();
+  }
+
+  getPreferences() {
+    this.app.logoUrl = 'assets/images/konekted.svg';
     this.preference.getPreferences().then((response) => {
       if (!response.error) {
         response.data.forEach((dataSet: any) => {
@@ -33,15 +38,17 @@ export class AppConfigService {
   }
 
   app = {
-    name: 'System Name',
-    longName: 'System Name',
-    heading: 'Headline of the System',
+    name: 'Konekted IoT',
+    longName: 'Konekted IoT',
+    heading: 'Connecting IoT devices should be simpler and faster ⚡',
     description: `
-                  Laravel may also serve as an API backend to a JavaScript single-page
-                  application or mobile application. For example, you might use Laravel as an
-                  API backend for your Next.js application
+                  This platform allows users to manage hardware projects easily and efficiently
+                  simply by registering through the platform and connect with hardware sensors,
+                  and other components through graphical user interface, this should allow
+                  innovative ideas to be implemented easier without hassle of manually
+                  implementing codes
                 `,
-    logoUrl: 'assets/images/nafuu-hrm-new.png',
+    logoUrl: 'assets/images/konekted.svg',
   }
 
   website = {
@@ -53,8 +60,12 @@ export class AppConfigService {
   }
 
   preferences = {
-    companyName: 'NAFUUTRONICS',
+    companyName: 'Nafuutronics',
     imageSelector: 'assets/images/upload-image.svg',
+    imageSelectorBoard: 'assets/images/devices/board.svg',
+    imageSelectorSensor: 'assets/images/devices/sensor.svg',
+    imageSelectorActuator: 'assets/images/devices/actuator.svg',
+    imageConnect: 'assets/images/connect-arrow.svg',
   }
 
   monthsList = [

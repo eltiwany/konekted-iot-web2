@@ -49,6 +49,7 @@
               "node_modules/notyf/notyf.min.js",
               "node_modules/simplebar/dist/simplebar.min.js",
               "node_modules/datatables.net/js/jquery.dataTables.js",
+              "node_modules/apexcharts/dist/apexcharts.min.js",
               "src/assets/js/volt.js"
             ]
           },

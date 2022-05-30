@@ -1,0 +1,62 @@
+<form class="p-1" [formGroup]="form" (ngSubmit)="onSubmit()" autocomplete="off">
+  <div class="row">
+    <div class="col col-12">
+      <div class="form-floating mb-3">
+        <select
+          (change)="previewBoard()"
+          id="board"
+          class="form-control"
+          aria-placeholder="Board"
+          [formControlName]="'boardId'"
+        >
+          <option *ngFor="let datum of data" [value]="datum.board.id">{{ datum.board.name }}</option>
+        </select>
+        <label class="my-1 me-2" for="board">Board</label>
+      </div>
+    </div>
+  </div>
+  <div class="p-2 row" *ngIf="!datum">
+    <div class="alert alert-info">
+      Select board to preview and link to your account, you will be provided with <b>token</b> to upload to your physical board.
+    </div>
+  </div>
+
+  <div class="p-2 row" *ngIf="datum">
+    <div class="col-md-4">
+      <div class="alert">
+        <img [src]="api.storageHost + datum[0].board.image_url" [alt]="datum[0].board.name">
+      </div>
+    </div>
+    <div class="col-md-8 table-responsive">
+      <div class="alert">
+        <h4 class="font-weight-900 alert-dark text-center rounded p-2 mb-3">{{ datum[0].board.name }}</h4>
+        <h6 class="font-weight-750 m-0">Description</h6>
+        <hr style="margin: 0.25rem 0 !important;">
+        <p>{{ datum[0].board.description }}</p>
+        <h6 class="font-weight-750 m-0">Board Pins</h6>
+        <hr style="margin: 0.25rem 0 !important;">
+        <table class="table table-centered bg-white table-nowrap table-borderless mb-0">
+          <tbody>
+            <tr *ngFor="let pin of datum[0].pinTypes">
+              <th class="p-1">{{ pin.pin_type }}</th>
+              <td class="p-1">
+                <span *ngFor="let type of filterPins(datum[0].pins, pin.pin_type)" class="badge bg-dark mx-1">
+                  {{ type.pin_number }}
+                </span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <button
+        class="w-100 btn btn-success"
+        [class.disabled]="(!form.valid)"
+        [type]="(form.valid) ? 'submit' : 'button'"
+        >
+        Link Board
+        <i class="bi bi-check-circle-fill"></i>
+      </button>
+    </div>
+  </div>
+</form>

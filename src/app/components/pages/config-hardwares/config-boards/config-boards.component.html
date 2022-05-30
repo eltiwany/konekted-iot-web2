@@ -1,0 +1,61 @@
+<app-top-bar
+  [exportOptions]="true"
+  [newButton]="true"
+  [newButtonName]="'New Board'"
+  [modalContent]="modalComponent"
+  [modalSize]="'lg'"
+  modalRef="newModal"
+  [dataArray]="data"
+  [colsArray]="cols"
+></app-top-bar>
+
+<div class="card">
+  <div class="table-responsive py-4" id="htmlData" #htmlData>
+    <div class="dataTable-wrapper dataTable-loading no-footer fixed-columns">
+      <table datatable [dtOptions]="dtOptions" class="table table-flush dataTable-table" id="htmlData">
+        <thead class="thead-light">
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Description</th>
+          <th>Pins Used</th>
+          <th>Total Pins</th>
+          <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody *ngIf="data?.length != 0">
+        <ng-container *ngFor="let datum of  data; let i = index">
+          <tr>
+            <th>{{ datum.board.id }}</th>
+            <td>{{ datum.board.name ? datum.board.name : 'N/A' }}</td>
+            <td>{{ datum.board.description | slice : 0:30 }} {{ datum.board.description.length > 30 ? "..." : "" }}</td>
+            <td>
+              <span *ngFor="let type of datum.pinTypes" class="badge bg-dark mx-1">
+                {{ type.pin_type }}
+              </span>
+            </td>
+            <td>{{ sumPins(datum.pinTypes) }}</td>
+            <td>
+              <app-action-buttons
+                [headingDelete]="'Delete Board: ' + datum.board.name"
+                [headingEdit]="'Edit Board: ' + datum.board.name"
+                [headingView]="'View Board: ' + datum.board.name"
+                [modalEditContent]="modalEditComponent"
+                [modalDeleteContent]="modalDeleteComponent"
+                [modalViewContent]="modalViewComponent"
+                [modalViewSize]="'lg'"
+                [modalEditSize]="'lg'"
+                [data]="datum"
+              ></app-action-buttons>
+            </td>
+          </tr>
+        </ng-container>
+        <tbody *ngIf="data?.length == 0">
+          <tr>
+            <th colspan="3">No data found.</th>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

@@ -1,12 +1,12 @@
-<div class="container v-center col-xl-10 col-xxl-8 px-4 py-5">
-  <div class="row align-items-center g-lg-5 py-5">
-    <div class="col-md-6 m-auto">
+<div class="container d-flex align-items-center justify-content-center h-100">
+  <div class="g-lg-5 py-5">
+    <div class="w-100">
       <label class="text-center w-100 mb-3">
         <a routerLink="">
           <img [src]="config.app.logoUrl" alt="" height="100">
         </a>
       </label>
-      <div class="card mb-4 rounded-3 mx-auto">
+      <div class="card mb-4 rounded-lg mx-auto">
         <div class="card-header py-3 bg-primary text-white">
           <h5 class="text-center p-0 m-0">Login in to access {{ config.app.name }}</h5>
         </div>
@@ -50,11 +50,11 @@
               <i class="bi bi-arrow-right-circle"></i>
             </button>
             <hr class="my-4">
-            <label class="text-muted text-center">Can't Login?
-              <a routerLink="/activate-account">
-               <u>Activate your account</u>
+            <label class="text-muted text-center">New here?
+              <a routerLink="/register">
+               <u>Create your account now!</u>
               </a>
-              or Contact IT support!</label>
+              </label>
           </form>
         </div>
       </div>

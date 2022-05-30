@@ -33,19 +33,33 @@
   <!-- End mobile menu -->
 
   <!-- Start of side menu  -->
-  <ul class="nav flex-column pt-3 pt-md-0">
+  <div class="logo-section">
+    <div class="logo">
+      <img [src]="config.app.logoUrl" alt="Volt Logo">
+    </div>
+    <div class="logo-brand">
+      <h1 class="brand-name">{{ config.app.name }}</h1>
+      <app-hardware-connection-buttons
+        [modalConnectBoardContent]="modalConnectBoardComponent"
+        [boardName]="boardName"
+        [isBoardConnected]="isBoardConnected"
+      ></app-hardware-connection-buttons>
+    </div>
+  </div>
+
+  <ul class="nav flex-column pt-3 pt-md-0 mt-6">
     <li class="nav-item">
-      <a routerLink="" class="nav-link d-flex align-items-center">
+
+      <!-- <a routerLink="" class="nav-link d-flex align-items-center">
         <span class="sidebar-icon">
           <img [src]="config.app.logoUrl" width="35" alt="Volt Logo">
-          <!-- <i class="bi bi-people-fill"></i> -->
         </span>
         <span class="mt-1 ms-1 sidebar-text">{{ config.app.name }}</span>
-      </a>
+      </a> -->
     </li>
 
     <!-- Separator -->
-    <li role="separator" class="dropdown-divider mt-3 mb-3 border-gray-700"></li>
+    <li role="separator" class="dropdown-divider mt-4 mb-3 border-gray-700"></li>
 
     <!-- Dashboard -->
     <li *ngIf="permissions.isAllowedPath(['dashboard'])" class="nav-item" routerLinkActive="active">
@@ -57,8 +71,142 @@
       </a>
     </li>
 
-    <!-- Users -->
-    <li *ngIf="permissions.isAllowedPath(['users'])" class="nav-item" routerLinkActive="active">
+    <!-- Linked Boards -->
+    <li *ngIf="permissions.isAllowedPath(['boards'])" class="nav-item" routerLinkActive="active">
+      <a routerLink="hardwares/boards" class="nav-link">
+        <span class="sidebar-icon">
+          <i class="icon icon-xs bi bi-cpu-fill me-2"></i>
+        </span>
+        <span class="sidebar-text">Boards</span>
+      </a>
+    </li>
+
+    <!-- Linked Sensors -->
+    <li *ngIf="permissions.isAllowedPath(['sensors'])" class="nav-item" routerLinkActive="active">
+      <a routerLink="hardwares/sensors" class="nav-link">
+        <span class="sidebar-icon">
+          <i class="icon icon-xs bi bi-thermometer-sun me-2"></i>
+        </span>
+        <span class="sidebar-text">Sensors</span>
+      </a>
+    </li>
+
+    <!-- Linked Actuators -->
+    <li *ngIf="permissions.isAllowedPath(['actuators'])" class="nav-item" routerLinkActive="active">
+      <a routerLink="hardwares/actuators" class="nav-link">
+        <span class="sidebar-icon">
+          <i class="icon icon-xs bi bi-lightbulb-fill me-2"></i>
+        </span>
+        <span class="sidebar-text">Actuators</span>
+      </a>
+    </li>
+
+    <!-- Device Management -->
+    <li *ngIf="permissions.isAllowedPath(hardwareManagerRoutes)" class="nav-item" routerLinkActive="active">
+      <span
+        [class.collapsed]="!router.isActive('config-hardwares', false)"
+        class="nav-link d-flex justify-content-between align-items-center"
+        data-bs-toggle="collapse" data-bs-target="#submenu-config-hardwares"
+        [attr.aria-expanded]="router.isActive('config-hardwares', false)">
+        <span>
+          <span class="sidebar-icon">
+            <i class="icon icon-xs me-2 bi bi-person-badge-fill"></i>
+          </span>
+          <span class="sidebar-text">Config Hardwares</span>
+        </span>
+        <span class="link-arrow">
+          <svg class="icon icon-sm" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
+        </span>
+      </span>
+      <div class="multi-level collapse " role="list"
+        id="submenu-config-hardwares" aria-expanded="false"
+        [class.show]="router.isActive('config-hardwares', false)">
+
+        <!-- Submenus -->
+        <ul class="flex-column nav">
+
+          <!-- Pins -->
+          <li *ngIf="permissions.isAllowedPath(['config-pin-types'])" class="nav-item" routerLinkActive="active">
+            <a class="nav-link" routerLink="/config-hardwares/config-pin-types">
+              <span class="sidebar-icon">
+                <i class="bi bi-arrows-angle-contract"></i>
+              </span>
+              <span class="sidebar-text">Config Pin Types</span>
+            </a>
+          </li>
+
+          <!-- Boards -->
+          <li *ngIf="permissions.isAllowedPath(['config-boards'])" class="nav-item" routerLinkActive="active">
+            <a class="nav-link" routerLink="/config-hardwares/config-boards">
+              <span class="sidebar-icon">
+                <i class="bi bi-cpu-fill"></i>
+              </span>
+              <span class="sidebar-text">Config Boards</span>
+            </a>
+          </li>
+
+          <!-- Sensors -->
+          <li *ngIf="permissions.isAllowedPath(['config-sensors'])" class="nav-item" routerLinkActive="active">
+            <a class="nav-link" routerLink="/config-hardwares/config-sensors">
+              <span class="sidebar-icon">
+                <i class="bi bi-thermometer-sun"></i>
+              </span>
+              <span class="sidebar-text">Config Sensors</span>
+            </a>
+          </li>
+
+          <!-- Actuators -->
+          <li *ngIf="permissions.isAllowedPath(['config-actuators'])" class="nav-item" routerLinkActive="active">
+            <a class="nav-link" routerLink="/config-hardwares/config-actuators">
+              <span class="sidebar-icon">
+                <i class="bi bi-lamp-fill"></i>
+              </span>
+              <span class="sidebar-text">Config Actuators</span>
+            </a>
+          </li>
+
+        </ul>
+      </div>
+    </li>
+
+    <!-- Separator -->
+    <li role="separator" class="dropdown-divider mt-3 mb-3 border-gray-700"></li>
+
+    <!-- Monitor Hardwares -->
+    <li *ngIf="permissions.isAllowedPath(['monitor-hardwares'])" class="nav-item" routerLinkActive="active">
+      <a routerLink="monitor-and-control/monitor-hardwares" class="nav-link">
+        <span class="sidebar-icon">
+          <i class="icon icon-xs bi bi-speedometer me-2"></i>
+        </span>
+        <span class="sidebar-text">Monitor Hardwares</span>
+      </a>
+    </li>
+
+    <!-- Control Actuators -->
+    <li *ngIf="permissions.isAllowedPath(['control-actuators'])" class="nav-item" routerLinkActive="active">
+      <a routerLink="monitor-and-control/control-actuators" class="nav-link">
+        <span class="sidebar-icon">
+          <i class="icon icon-xs bi bi-hand-index-thumb-fill me-2"></i>
+        </span>
+        <span class="sidebar-text">Control Actuators</span>
+      </a>
+    </li>
+
+    <!-- Automate Hardwares -->
+    <li *ngIf="permissions.isAllowedPath(['automate-hardwares'])" class="nav-item" routerLinkActive="active">
+      <a routerLink="monitor-and-control/automate-hardwares" class="nav-link">
+        <span class="sidebar-icon">
+          <i class="icon icon-xs bi bi-ui-radios me-2"></i>
+        </span>
+        <span class="sidebar-text">Automate Hardwares</span>
+      </a>
+    </li>
+
+    <!-- Separator -->
+    <li role="separator" class="dropdown-divider mt-3 mb-3 border-gray-700"></li>
+
+     <!-- Users -->
+     <li *ngIf="permissions.isAllowedPath(['users'])" class="nav-item" routerLinkActive="active">
       <a routerLink="users" class="nav-link">
         <span class="sidebar-icon">
           <i class="icon icon-xs bi bi-people-fill me-2"></i>
@@ -111,9 +259,6 @@
         </ul>
       </div>
     </li>
-
-    <!-- Separator -->
-    <li role="separator" class="dropdown-divider mt-3 mb-3 border-gray-700"></li>
 
     <!-- System Settings -->
     <li *ngIf="permissions.isAllowedPath(settingsRoutes)" class="nav-item" routerLinkActive="active">

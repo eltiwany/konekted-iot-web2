@@ -1,0 +1,48 @@
+<app-top-bar
+  [exportOptions]="false"
+  [newButton]="false"
+></app-top-bar>
+
+<div class="row">
+  <div class="col col-md-3" *ngFor="let datum of data">
+    <app-hardware-list-card
+      [imageUrl]="api.storageHost + datum.board.image_url"
+      [isImage]="true"
+      [link]="false"
+      [textButton]="true"
+      [deleteAction]="true"
+      [color]="'info'"
+      [modalSize]="'lg'"
+      [modalContent]="modalViewComponent"
+      [modalDeleteContent]="modalDeleteComponent"
+      headingDelete="Unlink Board"
+      [deviceName]="datum.board.name"
+      [token]="datum.board.token"
+      [data]="datum"
+    ></app-hardware-list-card>
+  </div>
+
+  <div class="col col-md-3" *ngIf="data.length != 0">
+    <app-hardware-list-card
+      [modalSize]="'lg'"
+      [color]="'info'"
+      heading="Link Another Board"
+      [modalContent]="modalComponent"
+      [linkMessage]="'Click the plus icon to link another device.'"
+      [iconName]="'node-plus-fill'"
+      [data]="data"
+    ></app-hardware-list-card>
+  </div>
+
+  <div class="col col-md-3" *ngIf="data.length == 0">
+    <app-hardware-list-card
+      [modalSize]="'lg'"
+      [color]="'info'"
+      heading="Link Board"
+      [modalContent]="modalComponent"
+      [linkMessage]="'Click the plus icon to link a device.'"
+      [iconName]="'plus-circle-fill'"
+      [data]="data"
+    ></app-hardware-list-card>
+  </div>
+</div>

@@ -26,7 +26,7 @@ export class RegisterComponent implements OnInit {
 
   form = new FormGroup({
     'email': new FormControl('', [AuthValidators.email]),
-    'defaultPassword': new FormControl('', [GeneralValidators.required]),
+    'name': new FormControl('', [GeneralValidators.required]),
     'passwords': new FormGroup({
       'password': new FormControl('', [AuthValidators.password]),
       'confirmPassword': new FormControl('', [AuthValidators.password]),
@@ -37,8 +37,8 @@ export class RegisterComponent implements OnInit {
     return this.form.get('email');
   }
 
-  get defaultPassword() {
-    return this.form.get('defaultPassword');
+  get name() {
+    return this.form.get('name');
   }
 
   get passwords() {
@@ -55,12 +55,12 @@ export class RegisterComponent implements OnInit {
 
   onSubmit = (): void => {
     const data = {
+      name: this.name?.value,
       email: this.email?.value,
-      currentPassword: this.defaultPassword?.value,
       password: this.password?.value,
     };
-    
-    this.auth.activateAccount(data).then((response) => {
+
+    this.auth.register(data).then((response) => {
       if (!response.error) {
         this.router.navigate(['/login']);
       }

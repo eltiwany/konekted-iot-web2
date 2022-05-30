@@ -1,0 +1,123 @@
+<form class="p-1" [formGroup]="form" (ngSubmit)="onSubmit()" autocomplete="off">
+  <div class="row">
+    <div class="col col-12">
+      <div class="form-floating mb-3">
+        <select
+          (change)="previewSensor()"
+          id="sensor"
+          class="form-control"
+          aria-placeholder="Sensor"
+          [formControlName]="'sensorId'"
+        >
+          <option *ngFor="let datum of data" [value]="datum.sensor.id">{{ datum.sensor.name }}</option>
+        </select>
+        <label class="my-1 me-2" for="sensor">Sensor</label>
+      </div>
+
+      <ng-container *ngIf="datum && activeBoard">
+        <h6 class="font-weight-750 m-0">Name</h6>
+        <div class="form-floating mb-3">
+          <input
+            formControlName="name"
+            [class.invalid]="name?.touched && name?.invalid"
+            name="text"
+            class="form-control"
+            id="floatingname"
+            placeholder="Name"
+          >
+          <label for="floatingname">Name</label>
+          <p class="text-danger font-weight-bold p-0 m-0" *ngIf="name?.touched && name?.invalid">{{ name?.errors?.message }}</p>
+        </div>
+
+        <h6 class="font-weight-750 m-0">Get data from this sensor after every ? (seconds)</h6>
+        <div class="form-floating mb-3">
+          <input
+            formControlName="interval"
+            [class.invalid]="interval?.touched && interval?.invalid"
+            name="text"
+            class="form-control"
+            id="floatinginterval"
+            placeholder="Interval"
+          >
+          <label for="floatinginterval">Interval</label>
+          <p class="text-danger font-weight-bold p-0 m-0" *ngIf="interval?.touched && interval?.invalid">{{ interval?.errors?.message }}</p>
+        </div>
+
+        <h6 class="font-weight-750 m-0">Connect {{ datum[0].sensor?.name }} sensor with {{ activeBoard.board?.name }} board</h6>
+        <div class="row clear-both" *ngFor="let row of rows; let i = index">
+          <div class="col col-md-6">
+            <div class="form-floating mb-3">
+              <select
+                id="sensorPin"
+                class="form-control"
+                aria-placeholder="Sensor Pin"
+                [formControlName]="'floatingSensorPin' + i"
+              >
+                <option *ngFor="let pin of datum[0].pins" [value]="pin.id">{{ pin.pin_type }}</option>
+              </select>
+              <label class="my-1 me-2" for="sensorPin">Sensor Pin</label>
+            </div>
+          </div>
+
+          <div class="col col-md-6">
+            <div class="form-floating mb-3">
+              <select
+                (change)="changePin(i)"
+                id="boardPin"
+                class="form-control"
+                aria-placeholder="Board Pin"
+                [formControlName]="'floatingBoardPin' + i"
+              >
+                <option *ngFor="let pin of activeBoard.pins" [value]="pin.id">{{ pin.pin_type + pin.pin_number }}</option>
+              </select>
+              <label class="my-1 me-2" for="boardPin">Board Pin</label>
+            </div>
+          </div>
+        </div>
+
+        <button
+          class="w-100 btn btn-primary"
+          [class.disabled]="(!form.valid)"
+          [type]="(form.valid) ? 'submit' : 'button'"
+          >
+          Link Sensor
+          <i class="bi bi-file-earmark-plus-fill"></i>
+        </button>
+      </ng-container>
+    </div>
+  </div>
+
+  <ng-container *ngIf="datum && activeBoard">
+    <div class="p-2 row">
+      <div class="col col-md-5">
+        <div class="alert content-center">
+          <img [src]="api.storageHost + datum[0].sensor.image_url" [alt]="datum[0].sensor.name">
+        </div>
+      </div>
+
+      <div class="col col-md-2">
+        <div class="alert content-center rotate-90">
+          <img [src]="config.preferences.imageConnect">
+        </div>
+      </div>
+
+      <div class="col col-md-5">
+        <div class="alert content-center">
+          <img [src]="api.storageHost + activeBoard.board.image_url" [alt]="activeBoard.board.name">
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</form>
+
+<div *ngIf="!activeBoard && datum">
+  <div class="alert alert-danger">
+    Error: No board have been linked to your account! you can not link a sensor without a connection to a board.
+  </div>
+</div>
+
+<div *ngIf="!datum">
+  <div class="alert alert-info">
+    Select sensor to preview and link to your account, you will connect all sensor pins to a board.
+  </div>
+</div>

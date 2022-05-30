@@ -1,3 +1,6 @@
+import { MncHardwaresModule } from './../../components/pages/mnc-hardwares/mnc-hardwares.module';
+import { LinkHardwaresModule } from './../components/modals/pages/link-hardwares/link-hardwares.module';
+import { ConfigHardwaresModule } from './../components/modals/pages/config-hardwares/config-hardwares.module';
 import { SystemPreferencesModule } from './../../components/pages/system-preferences/system-preferences.module';
 import { FragmentsModule } from './../components/fragments/fragments.module';
 import { ModalsModule } from './../components/modals/modals.module';
@@ -24,7 +27,10 @@ import { MyAreaModule } from 'src/app/components/pages/my-area/my-area.module';
     SettingsCommonModule,
     ModalsModule,
     MyAreaModule,
-    SystemPreferencesModule
+    SystemPreferencesModule,
+    ConfigHardwaresModule,
+    LinkHardwaresModule,
+    MncHardwaresModule
   ],
   providers: [
     LayoutsModule

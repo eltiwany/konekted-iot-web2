@@ -1,0 +1,27 @@
+<!-- Connect to hardware -->
+<div class="connect-button" *ngIf="connectBoardAction" (click)="modal.open(modalConnectBoard, modalConnectBoardSize)">
+  <div class="status-connect-button">
+    <i class="bi bi-circle-fill text-{{ isBoardConnected ? 'success' : 'danger' }}"></i>
+  </div>
+  <div class="status-connect-text">
+    <h1 class="connection-status">
+      {{ isBoardConnected ? "Connected" : "Not Connected" }}
+    </h1>
+    <p class="connection-board">
+      {{ isBoardConnected ? (boardName == "" ? "Failed to fetch board info." : boardName) : "Click to connect" }}
+    </p>
+  </div>
+</div>
+
+<!-- Connect Modal with Dynamic Form Loading -->
+<ng-template #modalConnectBoard let-modalv let-c="close" let-d="dismiss" class="p-0">
+  <div class="modal-header">
+      <h2 class="h6 modal-title">
+        <i class="bi bi-{{ iconNameConnectBoard }}"></i>
+        {{ headingConnectBoard }}</h2>
+      <button type="button" class="btn-close" (click)="modalv.dismiss('Cross click')"></button>
+  </div>
+  <div class="modal-body">
+    <ng-container *ngComponentOutlet="modalConnectBoardContent; injector: dataInjected"></ng-container>
+  </div>
+</ng-template>

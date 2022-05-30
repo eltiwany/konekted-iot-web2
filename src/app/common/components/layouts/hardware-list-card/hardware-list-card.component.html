@@ -1,0 +1,126 @@
+<div class="row mb-3">
+  <div class="col-12">
+      <div class="card border-0 shadow">
+          <div class="card-body d-flex justify-content-around h-card-fixed">
+              <div class="row">
+                <div
+                  class="col-12 text-center mb-3 align-items-center justify-content-center pointer"
+                  (click)="modalService.open(modal, modalSize)"
+                  >
+                    <div class="icon-shape icon-shape-{{ color }} rounded">
+                        <i *ngIf="!isImage" class="bi bi-{{ iconName }} card-icon2 p-3"></i>
+                        <img *ngIf="isImage" height="185px" [src]="imageUrl">
+                    </div>
+                </div>
+
+                <div class="col-12" *ngIf="!link">
+                  <div class="d-none d-sm-block">
+                      <p class="fw-extrabold mb-2 text-center">{{ deviceName }}</p>
+                  </div>
+                  <table class="small table table-bordered table-sm">
+
+                    <tr *ngIf="showStatus">
+                      <th>Status</th>
+                      <td>
+                        <span class="badge bg-danger mx-1">
+                          {{ status }}
+                        </span>
+                      </td>
+                    </tr>
+
+                    <!-- Connections of sensors and actuators -->
+                    <tr *ngIf="connections.length != 0">
+                      <th>Connections</th>
+                      <td>
+                        <table>
+                          <tr class="text-center">
+                            <th style="padding: 0 !important;"><small class="font-weight-750">S/A Pin</small></th>
+                            <th style="padding: 0 !important;"></th>
+                            <th style="padding: 0 !important; padding-left: 3px !important"><small class="font-weight-750">Board Pin</small></th>
+                          </tr>
+                          <tr *ngFor="let connection of connections">
+                            <td style="padding: 0 !important;"><span class="badge bg-dark">{{ connection.sensor_pin ?? connection.actuator_pin }}</span></td>
+                            <td style="padding: 0 !important;"><i class="bi bi-arrow-right"></i></td>
+                            <td style="padding: 0 !important; padding-left: 3px !important"><span class="badge bg-dark">{{ connection.board_pin + connection.board_pin_number }}</span></td>
+                          </tr>
+                        </table>
+
+
+                      </td>
+                    </tr>
+
+                    <!-- Expected data/columns of sensors and actuators -->
+                    <tr *ngIf="columns.length != 0">
+                      <th>Expected data</th>
+                      <td>
+                        <span class="badge bg-success mx-1" *ngFor="let column of columns">
+                          {{ column.column }}
+                        </span>
+                      </td>
+                    </tr>
+
+                    <tr *ngIf="token">
+                      <th>Token</th>
+                      <td>{{ token }}</td>
+                    </tr>
+
+                    <tr *ngIf="interval">
+                      <th>Interval</th>
+                      <td>{{ interval }}</td>
+                    </tr>
+
+                  </table>
+                </div>
+
+                <div class="col-12 card-link-device" *ngIf="link">
+                  <p class="font-weight-750">
+                    {{ linkMessage }}
+                  </p>
+                </div>
+
+                <div class="col-12 m-0 p-0">
+                  <div class="row m-0 p-0 mt-2">
+                    <div class="col col-md-8">
+                      <!-- View Button -->
+                      <button *ngIf="textButton" class="btn btn-{{ color }}" placement="bottom" ngbTooltip="Edit" (click)="modalService.open(modal, modalSize)">
+                        View Device
+                      </button>
+                    </div>
+                    <div class="col col-md-4">
+                      <!-- View Button -->
+                      <button *ngIf="deleteAction" class="btn btn-danger float-right" placement="bottom" ngbTooltip="Delete" (click)="modalService.open(modalDelete, modalDeleteSize)">
+                        <i class="bi bi-trash"></i>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+
+<!--  Modal with Dynamic Form Loading -->
+<ng-template #modal let-modalv let-c="close" let-d="dismiss" class="p-0">
+  <div class="modal-header bg-dark text-white">
+      <h2 class="h6 modal-title">{{ heading }}</h2>
+      <button type="button" class="btn-close bg-white" (click)="modalv.dismiss('Cross click')"></button>
+  </div>
+  <div class="modal-body">
+    <ng-container *ngComponentOutlet="modalContent; injector: dataInjected"></ng-container>
+  </div>
+</ng-template>
+
+<!-- Delete Modal with Dynamic Form Loading -->
+<ng-template #modalDelete let-modald let-c="close" let-d="dismiss" class="p-0">
+  <div class="modal-header bg-danger text-white">
+      <h2 class="h6 modal-title">{{ headingDelete }}</h2>
+      <button type="button" class="btn btn-link border-0 text-white" (click)="modald.dismiss('Cross click')">
+        <i class="bi bi-x-lg"></i>
+      </button>
+  </div>
+  <div class="modal-body">
+    <ng-container *ngComponentOutlet="modalDeleteContent; injector: dataInjected"></ng-container>
+  </div>
+</ng-template>

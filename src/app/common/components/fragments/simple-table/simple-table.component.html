@@ -22,7 +22,7 @@
                   <td *ngFor="let column of columns" class="fw-bolder text-gray-900" scope="row">
                     {{
                       column.numberFormat == 'currency' || !datum.is_percentage ?
-                      (datum[column.name] | number) + config.preferences.currency :
+                      (datum[column.name] | number) :
                       (
                         column.numberFormat == 'percent' || datum.is_percentage ?
                         (datum[column.name] | number) + "%" : datum[column.name]

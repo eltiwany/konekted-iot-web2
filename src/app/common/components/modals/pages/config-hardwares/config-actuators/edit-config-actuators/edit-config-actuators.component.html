@@ -1,0 +1,183 @@
+<form class="p-1" [formGroup]="form" (ngSubmit)="onSubmit()" autocomplete="off">
+  <div class="p-2 row">
+    <div class="col-md-4">
+      <!-- No image selected and no image has been uploaded -->
+      <label for="imageFile" class="text-right w-100 pointer" *ngIf="!imageFile?.file && !data.actuator.image_url">
+        <img class="preview-image" [src]="config.preferences.imageSelectorActuator">
+        <br>
+        <h4 class="mt-4 image-label text-center font-weight-900">
+          Click to Upload Image
+        </h4>
+      </label>
+
+      <!-- Selected Image Preview -->
+      <label for="imageFile" *ngIf="imageFile?.file" class="text-right w-100 pointer">
+        <img class="preview-image" [src]="imageFile?.link">
+        <br>
+        <h4 class="mt-4 image-label text-center font-weight-900">
+          Click to Change Image
+        </h4>
+      </label>
+
+      <!-- Show Uploaded Image -->
+      <label for="imageFile" *ngIf="!imageFile?.file && data.actuator.image_url" for="imageFile" class="text-right w-100 pointer">
+        <img class="preview-image" [src]="api.storageHost + data.actuator.image_url">
+        <br>
+        <h4 class="mt-4 image-label text-center font-weight-900">
+          Click to Change Image
+        </h4>
+        </label>
+        <input type="file" id="imageFile" (change)="imagesPreview($event)" style="display: none;">
+    </div>
+
+    <div class="col-md-8 table-responsive">
+      <div>
+        <div class="form-floating mb-3">
+          <input
+            formControlName="name"
+            [class.invalid]="name?.touched && name?.invalid"
+            name="text"
+            class="form-control"
+            id="floatingname"
+            placeholder="Name"
+          >
+          <label for="floatingname">Name</label>
+          <p class="text-danger font-weight-bold p-0 m-0" *ngIf="name?.touched && name?.invalid">{{ name?.errors?.message }}</p>
+        </div>
+
+        <div class="form-floating mb-3">
+          <textarea
+            formControlName="description"
+            [class.invalid]="description?.touched && description?.invalid"
+            description="text"
+            class="form-control"
+            id="floatingdescription"
+            placeholder="Description"
+            style="height: 200px;"
+          ></textarea>
+          <label for="floatingdescription">Description</label>
+          <p class="text-danger font-weight-bold p-0 m-0" *ngIf="description?.touched && description?.invalid">{{ description?.errors?.message }}</p>
+        </div>
+
+        <button
+          class="btn btn-danger float-right mb-3"
+          (click)="addPin()"
+          type="button"
+          >
+          <i class="bi bi-node-plus-fill"></i>
+          New Pin
+        </button>
+
+        <div class="row clear-both" *ngFor="let row of rows; let i = index">
+          <div class="col col-md-4">
+            <div class="form-floating mb-3">
+              <select
+                (change)="addRow(i, ('floatingpinType' + i), ('floatingpinNumber' + i), ('floatingremarks' + i))"
+                id="state"
+                class="form-control"
+
+                [formControlName]="'floatingpinType' + i"
+              >
+                <option *ngFor="let pinType of pinTypes" [value]="pinType.id">{{ pinType.type }}</option>
+              </select>
+              <label class="my-1 me-2" for="state">Pin Type</label>
+            </div>
+          </div>
+
+          <div class="col col-md-3">
+            <div class="form-floating mb-3">
+              <input
+                (change)="addRow(i, ('floatingpinType' + i), ('floatingpinNumber' + i), ('floatingremarks' + i))"
+
+                type="number"
+                class="form-control"
+                [formControlName]="'floatingpinNumber' + i"
+                placeholder="Pin Number"
+              >
+              <label for="floatingpinNumber">Pin Number</label>
+            </div>
+          </div>
+
+          <div class="col col-md-4">
+            <div class="form-floating mb-3">
+              <input
+                (change)="addRow(i, ('floatingpinType' + i), ('floatingpinNumber' + i), ('floatingremarks' + i))"
+
+                type="text"
+                class="form-control"
+                [formControlName]="'floatingremarks' + i"
+                placeholder="Remarks"
+              >
+              <label for="floatingremarks">Remarks</label>
+            </div>
+          </div>
+
+          <div class="col col-md-1 col-lg-1">
+            <div
+              class="mb-3 rounded bg-danger pointer"
+              style="height: 55px !important;"
+              (click)="removePin(i)"
+              >
+                <i
+                  class="bi bi-dash text-white"
+                  style="position: relative; top: 15px; left: 7px"
+                ></i>
+            </div>
+          </div>
+        </div>
+
+
+        <!-- Expected Result  -->
+
+        <button
+          class="btn btn-danger float-right mb-3"
+          (click)="addColumn()"
+          type="button"
+          >
+          <i class="bi bi-node-plus-fill"></i>
+          New Column (Expected Result)
+        </button>
+
+        <div class="row clear-both" *ngFor="let row of rowsForCols; let i = index">
+
+          <div class="col col-md-11 col-lg-11">
+            <div class="form-floating mb-3">
+              <input
+                (change)="addRowForCols(i, ('floatingcolumn' + i))"
+
+                type="text"
+                class="form-control"
+                [formControlName]="'floatingcolumn' + i"
+                placeholder="Column (Expected Result)"
+              >
+              <label for="floatingcolumn">Column (Expected Result)</label>
+            </div>
+          </div>
+
+          <div class="col col-md-1 col-lg-1">
+            <div
+              class="mb-3 rounded bg-danger pointer"
+              style="height: 55px !important;"
+              (click)="removeColumn(i)"
+              >
+                <i
+                  class="bi bi-dash text-white"
+                  style="position: relative; top: 15px; left: 7px"
+                ></i>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <button
+        class="w-100 btn btn-primary"
+        [class.disabled]="(!form.valid || actuatorPins.length < 1)"
+        [type]="(form.valid && actuatorPins.length > 0) ? 'submit' : 'button'"
+        >
+        Update
+        <i class="bi bi-check-circle-fill"></i>
+      </button>
+    </div>
+  </div>
+</form>

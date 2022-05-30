@@ -1,0 +1,48 @@
+<app-top-bar
+  [exportOptions]="true"
+  [newButton]="true"
+  [newButtonName]="'New Pin'"
+  [modalContent]="modalComponent"
+  modalRef="newModal"
+  [dataArray]="data"
+  [colsArray]="cols"
+></app-top-bar>
+
+<div class="card">
+  <div class="table-responsive py-4" id="htmlData" #htmlData>
+    <div class="dataTable-wrapper dataTable-loading no-footer fixed-columns">
+      <table datatable [dtOptions]="dtOptions" class="table table-flush dataTable-table" id="htmlData">
+        <thead class="thead-light">
+        <tr>
+          <th>ID</th>
+          <th>Type</th>
+          <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody *ngIf="data?.length != 0">
+        <ng-container *ngFor="let datum of  data; let i = index">
+          <tr>
+            <th>{{ datum.id }}</th>
+            <td>{{ datum.type ? datum.type : 'N/A' }}</td>
+            <td>
+              <app-action-buttons
+                [headingDelete]="'Delete Pin: ' + datum.type"
+                [headingEdit]="'Edit Pin: ' + datum.type"
+                [headingView]="'View Pin: ' + datum.type"
+                [modalEditContent]="modalEditComponent"
+                [modalDeleteContent]="modalDeleteComponent"
+                [modalViewContent]="modalViewComponent"
+                [data]="datum"
+              ></app-action-buttons>
+            </td>
+          </tr>
+        </ng-container>
+        <tbody *ngIf="data?.length == 0">
+          <tr>
+            <th colspan="3">No data found.</th>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

@@ -10,7 +10,7 @@
                       <h2 class="h5"> {{ cardName }}</h2>
                       <h3 class="mb-1" *ngIf="cardNumberFormat == 'number'">{{ cardNumber | number }}</h3>
                       <h3 class="mb-1" *ngIf="cardNumberFormat == 'percent'">{{ (cardNumber | number) + "%" }}</h3>
-                      <h3 class="mb-1" *ngIf="cardNumberFormat == 'currency'">{{ (cardNumber | number) + config.preferences.currency }}</h3>
+                      <h3 class="mb-1" *ngIf="cardNumberFormat == 'currency'">{{ (cardNumber | number) }}</h3>
                   </div>
               </div>
               <div class="col-12 col-xl-7 px-xl-0">
@@ -18,7 +18,7 @@
                       <h2 class="h4 mb-0"> {{ cardName }}</h2>
                       <h3 class="fw-extrabold mb-2" *ngIf="cardNumberFormat == 'number'">{{ cardNumber | number }}</h3>
                       <h3 class="fw-extrabold mb-2" *ngIf="cardNumberFormat == 'percent'">{{ (cardNumber | number) + "%" }}</h3>
-                      <h3 class="fw-extrabold mb-2" *ngIf="cardNumberFormat == 'currency'">{{ (cardNumber | number) + config.preferences.currency }}</h3>
+                      <h3 class="fw-extrabold mb-2" *ngIf="cardNumberFormat == 'currency'">{{ (cardNumber | number) }}</h3>
                   </div>
                   <a [routerLink]="allDataUrl">
                     Show Details

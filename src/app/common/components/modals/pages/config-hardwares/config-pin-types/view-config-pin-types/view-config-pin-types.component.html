@@ -1,0 +1,14 @@
+<form class="p-1" [formGroup]="form" (ngSubmit)="onSubmit()" autocomplete="off">
+  <div class="form-floating mb-3">
+    <input
+      formControlName="type"
+      [class.invalid]="type?.touched && type?.invalid"
+      type="text"
+      class="form-control"
+      id="floatingtype"
+      placeholder="Type"
+    >
+    <label for="floatingtype">Type</label>
+    <p class="text-danger font-weight-bold p-0 m-0" *ngIf="type?.touched && type?.invalid">{{ type?.errors?.message }}</p>
+  </div>
+</form>

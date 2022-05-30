@@ -27,9 +27,7 @@ export class HttpHrmService {
   async get(url: string, displayReponseAlert?: boolean): Promise<any> {
     return new Promise(resolve => {
       this.loader.start();
-      this.http.get(url, {
-        headers: this.headers.authToken
-      }).subscribe((response: any) => {
+      this.http.get(url).subscribe((response: any) => {
         if (displayReponseAlert)
           this.alert.showSuccess(response?.message);
         this.loader.complete();
@@ -52,9 +50,7 @@ export class HttpHrmService {
    async show(url: string, dataId: string, displayReponseAlert?: boolean): Promise<any> {
     return new Promise(resolve => {
       this.loader.start();
-      this.http.get(url + '/' + dataId, {
-        headers: this.headers.authToken
-      }).subscribe((response: any) => {
+      this.http.get(url + '/' + dataId).subscribe((response: any) => {
         if (displayReponseAlert)
           this.alert.showSuccess(response?.message);
         this.loader.complete();
@@ -77,9 +73,7 @@ export class HttpHrmService {
    async post(url: string, data: any, displayReponseAlert?: boolean): Promise<any> {
      return new Promise(resolve => {
       this.loader.start();
-      this.http.post(url, data, {
-        headers: this.headers.authToken
-      }).subscribe((response: any) => {
+      this.http.post(url, data).subscribe((response: any) => {
         if (displayReponseAlert)
           this.alert.showSuccess(response?.message);
         this.loader.complete();
@@ -102,10 +96,8 @@ export class HttpHrmService {
    * @returns Promise<responce>
    */
    async postFiles(url: string, data: any, displayReponseAlert?: boolean): Promise<any> {
-    const fileHeaders = new HttpHeaders();
-    fileHeaders.append('Content-Type', 'multipart/form-data');
-    fileHeaders.append('Accept', 'application/json');
-    fileHeaders.append('Authorization', `Bearer ${this.token}`);
+    let fileHeaders = new HttpHeaders();
+      fileHeaders.append('Content-Type', 'multipart/form-data');
 
     return new Promise(resolve => {
      this.loader.start();
@@ -136,9 +128,7 @@ export class HttpHrmService {
    async put(url: string, dataId: string, data: any, displayReponseAlert?: boolean): Promise<any> {
     return new Promise(resolve => {
      this.loader.start();
-     this.http.put(url + '/' + dataId, data, {
-       headers: this.headers.authToken
-     }).subscribe((response: any) => {
+     this.http.put(url + '/' + dataId, data).subscribe((response: any) => {
        if (displayReponseAlert)
          this.alert.showSuccess(response?.message);
        this.loader.complete();
@@ -160,19 +150,15 @@ export class HttpHrmService {
    * @param url
    * @returns Promise<responce>
    */
-  async putFiles(url: string, dataId: string, data: FormData | any, displayReponseAlert?: boolean): Promise<any> {
-    const fileHeaders = new HttpHeaders()
-      .set('Content-Type', 'multipart/form-data')
-      .set('Accept', 'application/json')
-      .set('Authorization', `Bearer ${this.token}`);
-
-    let options = {
-      headers: fileHeaders
-    };
+  async putFiles(url: string, dataId: string, data: any, displayReponseAlert?: boolean): Promise<any> {
+    let fileHeaders = new HttpHeaders();
+      fileHeaders.append('Content-Type', 'multipart/form-data');
 
     return new Promise(resolve => {
      this.loader.start();
-     this.http.put(url + '/' + dataId, data, options).subscribe((response: any) => {
+     this.http.put(url + '/' + dataId, data, {
+      headers: fileHeaders
+    }).subscribe((response: any) => {
        if (displayReponseAlert)
          this.alert.showSuccess(response?.message);
        this.loader.complete();

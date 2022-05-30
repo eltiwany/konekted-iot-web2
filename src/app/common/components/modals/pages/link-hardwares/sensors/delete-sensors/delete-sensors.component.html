@@ -1,0 +1,15 @@
+<p>
+  Unlink this sensor?<br/><br/>
+
+  Your physical device will no longer be able to communicate with the system.
+</p>
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <button
+    class="w-100 btn btn-lg btn-danger"
+    [class.disabled]="form.invalid"
+    [type]="form.valid ? 'submit' : 'button'"
+    >
+    Delete
+    <i class="bi bi-trash"></i>
+  </button>
+</form>

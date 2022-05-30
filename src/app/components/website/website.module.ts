@@ -4,11 +4,13 @@ import { CommonModule } from '@angular/common';
 
 import { WebsiteRoutingModule } from './website-routing.module';
 import { MyCommonModule } from 'src/app/common/common.module';
+import { ProjectsComponent } from './projects/projects.component';
 
 
 @NgModule({
   declarations: [
     HomeComponent,
+    ProjectsComponent,
   ],
   imports: [
     CommonModule,

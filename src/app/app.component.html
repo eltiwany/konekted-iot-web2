@@ -13,7 +13,7 @@
 
 <!-- Layout for guest -->
 <div *ngIf="auth.isGuest() && !loader.preloader">
-  <main class="main-guest" id="main-guest" [ngStyle]="{'background-image': 'url(' + config.website.frontImageUrl + ')'}">
+  <main class="main-guest" id="main-guest">
     <router-outlet></router-outlet>
   </main>
 </div>

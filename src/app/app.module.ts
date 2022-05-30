@@ -1,3 +1,4 @@
+import { TokenInterceptorService } from './services/token-interceptor.service';
 import { PreloaderComponent } from './components/pages/preloader/preloader.component';
 import { NgbModalRef, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrModule } from 'ngx-toastr';
@@ -11,6 +12,8 @@ import { MyCommonModule } from './common/common.module';
 import { registerLocaleData } from '@angular/common';
 import localeFr from '@angular/common/locales/de';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { NgApexchartsModule } from "ng-apexcharts";
 registerLocaleData(localeFr, 'fr');
 
 @NgModule({
@@ -27,12 +30,18 @@ registerLocaleData(localeFr, 'fr');
     ToastrModule.forRoot(),
     NgbModule,
     NgMultiSelectDropDownModule.forRoot(),
+    NgApexchartsModule,
   ],
   providers: [
     {
       provide: LOCALE_ID,
       useValue: 'en-US', // 'de-DE' for Germany, 'fr-FR' for France ...
 
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptorService,
+      multi: true
     }
   ],
   bootstrap: [AppComponent]

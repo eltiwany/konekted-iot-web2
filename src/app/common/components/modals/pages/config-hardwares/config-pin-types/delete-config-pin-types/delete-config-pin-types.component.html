@@ -1,0 +1,15 @@
+<p>
+  Delete this pin type?<br/><br/>
+  
+  If it has been assigned to board, sensor or actuator it won't be deleted.
+</p>
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <button
+    class="w-100 btn btn-lg btn-danger"
+    [class.disabled]="form.invalid"
+    [type]="form.valid ? 'submit' : 'button'"
+    >
+    Delete
+    <i class="bi bi-trash"></i>
+  </button>
+</form>

@@ -59,8 +59,9 @@ export class SystemPreferencesComponent implements OnInit {
   removePreference(key: string) {
     this.preference.removePreference(key).then((response) => {
       if (!response.error)
+        this.config.getPreferences();
         this.loader.refresh();
-    });
+      });
   }
 
   getPreferences() {
@@ -82,8 +83,10 @@ export class SystemPreferencesComponent implements OnInit {
     };
     // console.log(data);
 
-    if (this.form.valid)
+    if (this.form.valid) {
       this.preference.setPreference(key, data);
+      this.config.getPreferences();
+    }
   }
 
   updatePreferenceFiles(key: string): void {
@@ -95,6 +98,7 @@ export class SystemPreferencesComponent implements OnInit {
     if (this.imageFile.file)
       this.preference.setPreferenceFile(formData).then((response) => {
         if (!response.error)
+          this.config.getPreferences();
           this.loader.refresh();
       });
   }

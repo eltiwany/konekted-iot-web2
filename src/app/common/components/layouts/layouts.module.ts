@@ -8,6 +8,9 @@ import { CommonModule } from '@angular/common';
 import { TopBarComponent } from './top-bar/top-bar.component';
 import { ActionButtonsComponent } from './action-buttons/action-buttons.component';
 import { TopReportHeadingComponent } from './reports/top-report-heading/top-report-heading.component';
+import { HardwareConnectionButtonsComponent } from './hardware-connection-buttons/hardware-connection-buttons.component';
+import { HardwareListCardComponent } from './hardware-list-card/hardware-list-card.component';
+import { ControlDeviceCardComponent } from './control-device-card/control-device-card.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +20,9 @@ import { TopReportHeadingComponent } from './reports/top-report-heading/top-repo
     TopBarComponent,
     ActionButtonsComponent,
     TopReportHeadingComponent,
+    HardwareConnectionButtonsComponent,
+    HardwareListCardComponent,
+    ControlDeviceCardComponent
   ],
   imports: [
     CommonModule,
@@ -30,7 +36,10 @@ import { TopReportHeadingComponent } from './reports/top-report-heading/top-repo
     FooterComponent,
     TopBarComponent,
     ActionButtonsComponent,
-    TopReportHeadingComponent
+    TopReportHeadingComponent,
+    HardwareConnectionButtonsComponent,
+    HardwareListCardComponent,
+    ControlDeviceCardComponent
   ],
 })
 export class LayoutsModule { }

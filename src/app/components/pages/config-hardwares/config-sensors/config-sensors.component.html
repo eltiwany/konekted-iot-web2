@@ -1,0 +1,65 @@
+<app-top-bar
+  [exportOptions]="true"
+  [newButton]="true"
+  [newButtonName]="'New Sensor'"
+  [modalContent]="modalComponent"
+  [modalSize]="'lg'"
+  modalRef="newModal"
+  [dataArray]="data"
+  [colsArray]="cols"
+></app-top-bar>
+
+<div class="card">
+  <div class="table-responsive py-4" id="htmlData" #htmlData>
+    <div class="dataTable-wrapper dataTable-loading no-footer fixed-columns">
+      <table datatable [dtOptions]="dtOptions" class="table table-flush dataTable-table" id="htmlData">
+        <thead class="thead-light">
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Description</th>
+          <th>Pins Used</th>
+          <th>Expected Result</th>
+          <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody *ngIf="data?.length != 0">
+        <ng-container *ngFor="let datum of  data; let i = index">
+          <tr>
+            <th>{{ datum.sensor.id }}</th>
+            <td>{{ datum.sensor.name ? datum.sensor.name : 'N/A' }}</td>
+            <td>{{ datum.sensor.description | slice : 0:30 }} {{ datum.sensor.description.length > 30 ? "..." : "" }}</td>
+            <td>
+              <span *ngFor="let type of datum.pinTypes" class="badge bg-dark mx-1">
+                {{ type.pin_type }}
+              </span>
+            </td>
+            <td>
+              <span *ngFor="let column of datum.columns" class="badge bg-info mx-1">
+                {{ column.column }}
+              </span>
+            </td>
+            <td>
+              <app-action-buttons
+                [headingDelete]="'Delete Sensor: ' + datum.sensor.name"
+                [headingEdit]="'Edit Sensor: ' + datum.sensor.name"
+                [headingView]="'View Sensor: ' + datum.sensor.name"
+                [modalEditContent]="modalEditComponent"
+                [modalDeleteContent]="modalDeleteComponent"
+                [modalViewContent]="modalViewComponent"
+                [modalViewSize]="'lg'"
+                [modalEditSize]="'lg'"
+                [data]="datum"
+              ></app-action-buttons>
+            </td>
+          </tr>
+        </ng-container>
+        <tbody *ngIf="data?.length == 0">
+          <tr>
+            <th colspan="3">No data found.</th>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
