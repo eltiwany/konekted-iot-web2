@@ -4,7 +4,7 @@
 ></app-top-bar>
 
 <div class="row">
-  <div class="col-md-6" *ngFor="let datum of data">
+  <div class="col-md-6 mb-4" *ngFor="let datum of data">
     <app-chart-selector
       [rootColumns]="datum?.columns"
       [rootSensor]="datum?.sensor"
