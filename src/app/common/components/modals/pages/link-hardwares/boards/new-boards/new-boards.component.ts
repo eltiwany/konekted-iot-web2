@@ -1,3 +1,4 @@
+import { BoardStateService } from './../../../../../../../services/iot/board-state.service';
 import { ModalsService } from './../../../../../../services/layouts/modals.service';
 import { LoaderService } from './../../../../../../services/extras/loader.service';
 import { GeneralValidators } from './../../../../../../../validators/general.validators';
@@ -22,7 +23,8 @@ export class NewBoardsComponent implements OnInit {
     private boardsService: BoardsService,
     public api: ApiService,
     public loader: LoaderService,
-    public modal: ModalsService
+    public modal: ModalsService,
+    private boardState: BoardStateService
   ) {}
 
   form = new FormGroup({
@@ -62,6 +64,7 @@ export class NewBoardsComponent implements OnInit {
     this.boardsService.newUserBoard(data).then((response) => {
       if (!response.error) {
         this.modal.close();
+        this.boardState.getActiveBoard();
         this.loader.refresh();
       }
     });

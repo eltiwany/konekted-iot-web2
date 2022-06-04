@@ -7,11 +7,12 @@ export class ApiService {
   /**
    * API Enviroment
    */
-  environment: 'prod' | 'dev' = 'prod';
+  environment: 'prod' | 'dev' = 'dev';
 
   /**
    * Base URL for API
    */
+  // baseUrl = this.environment == 'prod' ? 'http://konekted-api.nafuutronics.com/' : 'http://localhost:8000/';
   baseUrl = this.environment == 'prod' ? 'http://konekted-api.nafuutronics.com/' : 'http://localhost:8000/';
 
   /**
@@ -91,6 +92,7 @@ export class ApiService {
     getSensorPinTypes: this.host + 'get-sensor-pin-types',
     sensors: this.host + 'sensors',
     userSensors: this.host + 'user-sensors',
+    userSensorValues: this.host + 'get-user-sensor-values',
   }
 
   /**
@@ -111,6 +113,14 @@ export class ApiService {
    pinTypes = {
     getPinTypes: this.host + 'get-pin-types',
     pinTypes: this.host + 'pin-types',
+  }
+
+  /**
+   * Automations Api's
+   */
+   automations = {
+    getAutomations: this.host + 'get-automations',
+    automations: this.host + 'automations',
   }
 
   /**

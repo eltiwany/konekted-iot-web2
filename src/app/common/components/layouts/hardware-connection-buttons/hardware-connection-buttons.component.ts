@@ -1,3 +1,5 @@
+import { BoardStateService } from './../../../../services/iot/board-state.service';
+import { BoardsService } from './../../../../services/iot/boards.service';
 import { PermissionsGuardService } from './../../../../services/guards/permissions-guard.service';
 import { ModalsService } from './../../../services/layouts/modals.service';
 import { Component, Injector, Input, OnInit, Type, OnChanges } from '@angular/core';
@@ -33,11 +35,16 @@ export class HardwareConnectionButtonsComponent implements OnInit {
   constructor(
     public modal: ModalsService,
     public permission: PermissionsGuardService,
+    public boardState: BoardStateService,
     private injector: Injector
   ) { }
 
   ngOnInit(): void {
     this.dataInjected = this.createInjector(this.data);
+    this.boardState.getActiveBoard();
+    setInterval(() => {
+      this.boardState.getActiveBoard();
+    }, 30000);
   }
 
   createInjector(dataObj: any) {

@@ -17,7 +17,7 @@
       [modalContent]="modalViewComponent"
       [modalDeleteContent]="modalDeleteComponent"
       headingDelete="Unlink Actuator"
-      [deviceName]="datum.actuator.user_defined_name ?? datum.sensor.name"
+      [deviceName]="datum.actuator.user_defined_name ?? datum.actuator.name"
       [interval]="datum.actuator.interval"
       [data]="datum"
       [connections]="datum.connections"

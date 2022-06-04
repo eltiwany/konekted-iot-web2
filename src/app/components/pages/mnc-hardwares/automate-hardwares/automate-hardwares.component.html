@@ -1,1 +1,63 @@
-<p>automate-hardwares works!</p>
+<app-top-bar
+  [exportOptions]="true"
+  [newButton]="true"
+  [newButtonName]="'New Automation'"
+  [modalContent]="modalComponent"
+  modalRef="newModal"
+  [dataArray]="data"
+  [colsArray]="cols"
+></app-top-bar>
+
+<div class="card">
+  <div class="table-responsive py-4" id="htmlData" #htmlData>
+    <div class="dataTable-wrapper dataTable-loading no-footer fixed-columns">
+      <table datatable [dtOptions]="dtOptions" class="table table-flush dataTable-table" id="htmlData">
+        <thead class="thead-light">
+        <tr>
+          <th>ID</th>
+          <th>Sensor Name</th>
+          <th>Sensor Column</th>
+          <th>Operation</th>
+          <th>Compared Value</th>
+          <th>Actuator Name</th>
+          <th>Actuator State</th>
+          <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody *ngIf="data?.length != 0">
+        <ng-container *ngFor="let datum of  data; let i = index">
+          <tr>
+            <th>{{ datum.id }}</th>
+            <td>{{ datum.sensor_name ?? 'N/A' }}</td>
+            <td>{{ datum.column_name ?? 'N/A' }}</td>
+            <td>{{ fn.comparisonToEnglish(datum.comparison_operation) }}</td>
+            <td>{{ datum.value ?? 'N/A' }}</td>
+            <td>{{ datum.actuator_name ?? 'N/A' }}</td>
+            <td *ngIf="datum.is_switched_on">
+              <div class="badge bg-success">ON</div>
+            </td>
+            <td *ngIf="!datum.is_switched_on">
+              <div class="badge bg-danger">OFF</div>
+            </td>
+            <td>
+              <app-action-buttons
+                [headingDelete]="'Delete Automation: ' + datum.sensor_name + ' -> ' + datum.actuator_name"
+                [headingEdit]="'Edit Automation: ' + datum.sensor_name + ' -> ' + datum.actuator_name"
+                [headingView]="'View Automation: ' + datum.sensor_name + ' -> ' + datum.actuator_name"
+                [modalEditContent]="modalEditComponent"
+                [modalDeleteContent]="modalDeleteComponent"
+                [modalViewContent]="modalViewComponent"
+                [data]="datum"
+              ></app-action-buttons>
+            </td>
+          </tr>
+        </ng-container>
+        <tbody *ngIf="data?.length == 0">
+          <tr>
+            <th colspan="3">No data found.</th>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

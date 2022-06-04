@@ -1,0 +1,143 @@
+<form class="p-1" [formGroup]="form" (ngSubmit)="onSubmit()" autocomplete="off">
+  <div class="alert alert-info text-center">
+    <b>--- Select sensor value to compare ---</b>
+  </div>
+  <!-- Sensors -->
+  <div class="form-floating mb-3">
+    <select
+      formControlName="userSensor"
+      [class.invalid]="userSensor?.touched && userSensor?.invalid"
+      type="text"
+      class="form-control"
+      id="floatingSensor"
+      placeholder="Sensor"
+      (change)="getSensorColumns($event.target)"
+    >
+      <option [value]="">{{ selectors.userSensor }}</option>
+      <option *ngFor="let userSensor of userSensors" [value]="userSensor.sensor.id">
+        {{ userSensor.sensor.user_defined_name ?? userSensor.sensor.name }}
+      </option>
+    </select>
+    <label for="floatingSensor">Sensor</label>
+    <p class="text-danger font-weight-bold p-0 m-0" *ngIf="userSensor?.touched && userSensor?.invalid">{{ userSensor?.errors?.message }}</p>
+  </div>
+
+  <ng-container *ngIf="userSensor?.valid">
+    <div class="row">
+      <div class="col col-md-4">
+        <!-- Sensor Columns -->
+        <div class="form-floating mb-3">
+          <select
+            formControlName="sensorColumn"
+            [class.invalid]="sensorColumn?.touched && sensorColumn?.invalid"
+            type="text"
+            class="form-control"
+            id="floatingSensorColumn"
+            placeholder="SensorColumn"
+          >
+            <option [value]="">{{ selectors.sensorColumn }}</option>
+            <option *ngFor="let sensorColumn of sensorColumns" [value]="sensorColumn.id">
+              {{ sensorColumn.column }}
+            </option>
+          </select>
+          <label for="floatingColumn">Column</label>
+          <p class="text-danger font-weight-bold p-0 m-0" *ngIf="sensorColumn?.touched && sensorColumn?.invalid">{{ sensorColumn?.errors?.message }}</p>
+        </div>
+      </div>
+
+      <div class="col col-md-5">
+        <!-- Comparison Operation -->
+        <div class="form-floating mb-3">
+          <select
+            formControlName="comparisonOperation"
+            [class.invalid]="comparisonOperation?.touched && comparisonOperation?.invalid"
+            type="text"
+            class="form-control"
+            id="floatingSensorComparisonOperation"
+            placeholder="SensorComparisonOperation"
+          >
+            <option value="E">{{ fn.comparisonToEnglish("E") }}</option>
+            <option value="NE">{{ fn.comparisonToEnglish("NE") }}</option>
+            <option value="G">{{ fn.comparisonToEnglish("G") }}</option>
+            <option value="GE">{{ fn.comparisonToEnglish("GE") }}</option>
+            <option value="L">{{ fn.comparisonToEnglish("L") }}</option>
+            <option value="LE">{{ fn.comparisonToEnglish("LE") }}</option>
+          </select>
+          <label for="floatingComparisonOperation">Comparison Operation</label>
+          <p class="text-danger font-weight-bold p-0 m-0" *ngIf="comparisonOperation?.touched && comparisonOperation?.invalid">{{ comparisonOperation?.errors?.message }}</p>
+        </div>
+      </div>
+
+      <div class="col col-md-3">
+        <!-- Value -->
+        <div class="form-floating mb-3">
+          <input
+            formControlName="value"
+            [class.invalid]="value?.touched && value?.invalid"
+            type="text"
+            class="form-control"
+            id="floatingvalue"
+            placeholder="Value"
+          >
+          <label for="floatingvalue">Value</label>
+          <p class="text-danger font-weight-bold p-0 m-0" *ngIf="value?.touched && value?.invalid">{{ value?.errors?.message }}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="alert alert-info text-center">
+      <b>--- Select what to do if compared value is true ---</b>
+    </div>
+
+    <div class="row">
+      <div class="col col-md-6">
+         <!-- Actuators -->
+        <div class="form-floating mb-3">
+          <select
+            formControlName="userActuator"
+            [class.invalid]="userActuator?.touched && userActuator?.invalid"
+            type="text"
+            class="form-control"
+            id="floatingActuator"
+            placeholder="Actuator"
+          >
+            <option [value]="">{{ selectors.userActuator }}</option>
+            <option *ngFor="let userActuator of userActuators" [ngValue]="userActuator.actuator.id">
+              {{ userActuator.actuator.user_defined_name ?? userActuator.actuator.name }}
+            </option>
+          </select>
+          <label for="floatingActuator">Actuator</label>
+          <p class="text-danger font-weight-bold p-0 m-0" *ngIf="userActuator?.touched && userActuator?.invalid">{{ userActuator?.errors?.message }}</p>
+        </div>
+      </div>
+
+      <div class="col col-md-6">
+        <!-- Switch ON/OFF -->
+        <div class="form-floating mb-3">
+          <select
+            formControlName="isSwitchedOn"
+            [class.invalid]="isSwitchedOn?.touched && isSwitchedOn?.invalid"
+            type="text"
+            class="form-control"
+            id="floatingSwitch"
+            placeholder="Switch"
+          >
+            <option [value]="1">ON</option>
+            <option [value]="0">OFF</option>
+          </select>
+          <label for="floatingSwitch">Switch ON/OFF</label>
+          <p class="text-danger font-weight-bold p-0 m-0" *ngIf="isSwitchedOn?.touched && isSwitchedOn?.invalid">{{ isSwitchedOn?.errors?.message }}</p>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+
+  <button
+    class="w-100 btn btn-lg btn-primary"
+    [class.disabled]="form.invalid"
+    [type]="form.valid ? 'submit' : 'button'"
+    >
+    Update
+    <i class="bi bi-check-circle-fill"></i>
+  </button>
+</form>

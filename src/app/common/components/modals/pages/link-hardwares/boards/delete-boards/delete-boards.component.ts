@@ -1,3 +1,4 @@
+import { BoardStateService } from './../../../../../../../services/iot/board-state.service';
 import { BoardsService } from './../../../../../../../services/iot/boards.service';
 import { LoaderService } from 'src/app/common/services/extras/loader.service';
 import { ModalsService } from './../../../../../../services/layouts/modals.service';
@@ -21,7 +22,8 @@ export class DeleteBoardsComponent implements OnInit {
     private modal: ModalsService,
     private boardService: BoardsService,
     private loader: LoaderService,
-    public dataIn: ProviderClass
+    public dataIn: ProviderClass,
+    private boardState: BoardStateService
   ) { }
 
   ngOnInit(): void {
@@ -39,6 +41,7 @@ export class DeleteBoardsComponent implements OnInit {
     this.boardService.deleteUserBoard(this.boardId?.value).then((response) => {
       if (!response.error) {
         this.modal.close();
+        this.boardState.getActiveBoard();
         this.loader.refresh();
       }
     });

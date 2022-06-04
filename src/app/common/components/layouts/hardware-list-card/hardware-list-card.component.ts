@@ -21,7 +21,6 @@ export class HardwareListCardComponent implements OnInit {
   @Input() isImage: boolean = false;
 
   @Input() showStatus: boolean = true;
-  @Input() status: string = "Offline";
 
   @Input() textButton: boolean = false;
 
@@ -45,7 +44,7 @@ export class HardwareListCardComponent implements OnInit {
   @Input() modalDeleteSize: 'md' | 'lg' | 'sm' | 'xl' = 'md';
 
   // Data for View & Edit
-  @Input() data: any[] = [];
+  @Input() data: any = [];
 
   constructor(
     private config: AppConfigService,

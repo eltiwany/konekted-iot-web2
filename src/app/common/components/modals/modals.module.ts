@@ -7,6 +7,10 @@ import { DeleteUsersComponent } from './pages/users/delete-users/delete-users.co
 import { EditUsersComponent } from './pages/users/edit-users/edit-users.component';
 import { ResetUsersComponent } from './pages/users/reset-users/reset-users.component';
 import { ClearLogsComponent } from './pages/user-logs/clear-logs/clear-logs.component';
+import { NewAutomationsComponent } from './pages/automations/new-automations/new-automations.component';
+import { EditAutomationsComponent } from './pages/automations/edit-automations/edit-automations.component';
+import { DeleteAutomationsComponent } from './pages/automations/delete-automations/delete-automations.component';
+import { ViewAutomationsComponent } from './pages/automations/view-automations/view-automations.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +20,10 @@ import { ClearLogsComponent } from './pages/user-logs/clear-logs/clear-logs.comp
     EditUsersComponent,
     ResetUsersComponent,
     ClearLogsComponent,
+    NewAutomationsComponent,
+    EditAutomationsComponent,
+    DeleteAutomationsComponent,
+    ViewAutomationsComponent,
   ],
   imports: [
     CommonModule,

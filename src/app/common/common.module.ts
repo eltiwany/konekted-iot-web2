@@ -1,3 +1,4 @@
+import { FragmentsModule } from './components/fragments/fragments.module';
 
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';

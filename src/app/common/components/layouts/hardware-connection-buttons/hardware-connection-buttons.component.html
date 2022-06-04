@@ -1,14 +1,14 @@
 <!-- Connect to hardware -->
 <div class="connect-button" *ngIf="connectBoardAction" (click)="modal.open(modalConnectBoard, modalConnectBoardSize)">
   <div class="status-connect-button">
-    <i class="bi bi-circle-fill text-{{ isBoardConnected ? 'success' : 'danger' }}"></i>
+    <i class="bi bi-circle-fill text-{{ boardState.isOnline ? 'success' : 'danger' }}"></i>
   </div>
   <div class="status-connect-text">
     <h1 class="connection-status">
-      {{ isBoardConnected ? "Connected" : "Not Connected" }}
+      {{ boardState.boardName ? ( boardState. isOnline ? "Connected" : "Offline") : "Not Linked!" }}
     </h1>
     <p class="connection-board">
-      {{ isBoardConnected ? (boardName == "" ? "Failed to fetch board info." : boardName) : "Click to connect" }}
+      {{ boardState.boardName ? boardState.boardName : "Click to connect" }}
     </p>
   </div>
 </div>

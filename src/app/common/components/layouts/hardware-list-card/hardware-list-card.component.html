@@ -22,8 +22,8 @@
                     <tr *ngIf="showStatus">
                       <th>Status</th>
                       <td>
-                        <span class="badge bg-danger mx-1">
-                          {{ status }}
+                        <span [class]="(data.board?.is_online ? 'bg-success' : 'bg-danger') + ' badge mx-1'">
+                          {{ data.board?.is_online ? "Online" : "Offline" }}
                         </span>
                       </td>
                     </tr>

@@ -1,0 +1,69 @@
+<div class="row mt-2">
+  <div class="col-12">
+      <div class="card border-0 shadow">
+          <div class="card-header border-bottom text-center bg-dark text-white">
+              <h2 class="fs-5 fw-bold mb-0 ">{{ sensors?.user_defined_name ?? sensors?.name }}</h2>
+          </div>
+          <div class="card-body">
+            <ng-container *ngIf="columns">
+              <form class="p-1" [formGroup]="form" autocomplete="off">
+                <!-- Chart Selector -->
+                <div class="form-floating mb-3">
+                  <select
+                    formControlName="chartOption"
+                    [class.invalid]="chartOption?.touched && chartOption?.invalid"
+                    type="text"
+                    class="form-control"
+                    id="floatingChartSelector"
+                    placeholder="Chart Selector"
+                  >
+                    <option [value]="'line'">Line Chart</option>
+                    <option [value]="'area'">Area Chart</option>
+                    <option [value]="'column'">Column Chart</option>
+                    <option [value]="'pie'">Pie Chart</option>
+                  </select>
+                  <label for="floatingChartSelector">Chart Selector</label>
+                  <p class="text-danger font-weight-bold p-0 m-0" *ngIf="chartOption?.touched && chartOption?.invalid">{{ chartOption?.errors?.message }}</p>
+                </div>
+
+                <ng-container *ngIf="chartOption?.value == 'line'">
+                  <app-line-chart
+                    [columns]="columns"
+                    [sensor]="sensors"
+                  ></app-line-chart>
+                </ng-container>
+
+                <ng-container *ngIf="chartOption?.value == 'area'">
+                  <app-area-chart
+                    [columns]="columns"
+                    [sensor]="sensors"
+                    ></app-area-chart>
+                </ng-container>
+
+                <ng-container *ngIf="chartOption?.value == 'column'">
+                  <app-column-chart
+                    [columns]="columns"
+                    [sensor]="sensors"
+                  ></app-column-chart>
+                </ng-container>
+
+                <ng-container *ngIf="chartOption?.value == 'pie'">
+                  <app-pie-chart
+                    [columns]="columns"
+                    [sensor]="sensors"
+                  ></app-pie-chart>
+                </ng-container>
+
+              </form>
+            </ng-container>
+            <ng-container *ngIf="!columns">
+              <div class="alert alert-infor">
+                No data found.
+              </div>
+            </ng-container>
+
+          </div>
+      </div>
+  </div>
+</div>
+

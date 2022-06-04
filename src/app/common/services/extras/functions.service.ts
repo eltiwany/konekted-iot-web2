@@ -102,4 +102,27 @@ export class FunctionsService {
 
       return result;
   }
+
+  comparisonToEnglish(short: string): string {
+    switch (short) {
+      case "E":
+        return "Equal";
+      case "NE":
+        return "Not Equal";
+      case "G":
+        return "Greater Than";
+      case "GE":
+        return "Greater Than or Equal";
+      case "L":
+        return "Less Than";
+      case "LE":
+        return "Less Than or Equal";
+      default:
+        return "Invalid Comparison";
+    }
+  }
+
+  getColumnNames(columns: any[]) {
+    return columns.reduce((acc, curr, index) => acc + curr.name + (columns.length - 1 == index ? "" :", "), "")
+  }
 }

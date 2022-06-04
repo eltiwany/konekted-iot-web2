@@ -1,0 +1,13 @@
+<p>
+  Are you sure you want to delete automation sequence?
+</p>
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <button
+    class="w-100 btn btn-lg btn-danger"
+    [class.disabled]="form.invalid"
+    [type]="form.valid ? 'submit' : 'button'"
+    >
+    Delete
+    <i class="bi bi-trash"></i>
+  </button>
+</form>

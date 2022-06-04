@@ -30,6 +30,15 @@ export class SensorsService {
     return await this.http.get(this.api.sensors.userSensors, false);
   }
 
+  /**
+   * Get user sensors for datatable from API
+   * @param void
+   * @returns Promise<any>
+   */
+  async getUserSensorValues(): Promise<any> {
+    return await this.http.get(this.api.sensors.userSensorValues, false);
+  }
+
 
   /**
    * Get sensor pin types for datatable from API

@@ -1,3 +1,4 @@
+import { BoardStateService } from './../../../../services/iot/board-state.service';
 import { PreferencesService } from './../../../services/preferences.service';
 import { FormGroup, FormControl } from '@angular/forms';
 import { FunctionsService } from './../../../services/extras/functions.service';
@@ -69,6 +70,7 @@ export class TopBarComponent implements OnInit {
     public url: UrlService,
     public permission: PermissionsGuardService,
     public fn: FunctionsService,
+    private boardState: BoardStateService
   ) {}
 
   ngOnInit(): void {

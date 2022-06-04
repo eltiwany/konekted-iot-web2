@@ -1,3 +1,5 @@
+import { MyCommonModule } from 'src/app/common/common.module';
+import { FragmentsModule } from './../../../common/components/fragments/fragments.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { LayoutsModule } from './../../../common/components/layouts/layouts.module';
 import { DataTablesModule } from 'angular-datatables';
@@ -20,8 +22,8 @@ import { ControlActuatorsComponent } from './control-actuators/control-actuators
     CommonModule,
     DataTablesModule,
     LayoutsModule,
-    NgbModule,
-    MncHardwaresRoutingModule
+    FragmentsModule,
+    MncHardwaresRoutingModule,
   ]
 })
 export class MncHardwaresModule { }

@@ -82,7 +82,7 @@ export class ActuatorsService {
    * @returns Promise<any>
    */
    async switchActuator(data: any): Promise<any> {
-    return await this.http.post(this.api.actuators.switchActuator, data, true);
+    return await this.http.post(this.api.actuators.switchActuator, data, false);
   }
 
   /**

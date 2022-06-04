@@ -1,1 +1,13 @@
-<p>monitor-hardwares works!</p>
+<app-top-bar
+  [exportOptions]="false"
+  [newButton]="false"
+></app-top-bar>
+
+<div class="row">
+  <div class="col-md-6" *ngFor="let datum of data">
+    <app-chart-selector
+      [rootColumns]="datum?.columns"
+      [rootSensor]="datum?.sensor"
+    ></app-chart-selector>
+  </div>
+</div>
