@@ -3,84 +3,56 @@
 <div class="row mb-5">
 
   <!-- Cards with counting summary -->
-  <!-- <app-card-md4
-    *ngFor="let report of reportsWithNumbersColumns"
+  <app-card-md4
+    *ngFor="let datum of data"
     class="col-md-4"
-    [cardName]="fn.toUpperCamelCase(report.name)"
-    [cardNumber]="reportsWithNumbers[report.name]"
-    [iconName]="report.iconName"
-    [bgColor]="report.bgColor"
-    [textColor]="report.textColor"
-    [allDataUrl]="report.allDataUrl"
-  ></app-card-md4> -->
+    [cardName]="datum[0].name"
+    [cardNumber]="datum[0].value"
+    [iconName]="datum[1].iconName"
+    [bgColor]="datum[1].bgColor"
+    [textColor]="datum[1].textColor"
+    [allDataUrl]="datum[1].allDataUrl"
+  ></app-card-md4>
 
-  <!-- Simple Table -->
-  <!-- <app-simple-table
-    cardName="Card Name"
-    allDataUrl="/url/to-page"
-    [data]="tableData"
-    [columns]="tableColumns"
-  ></app-simple-table> -->
-
-    <div class="col-md-4">
-        <div class="card border-0 shadow">
-            <div class="card-body">
-                <div class="row d-block d-xxl-flex align-items-center">
-                    <div class="col-12 col-xxl-6 px-xxl-0 mb-3 mb-xxl-0">
-                        <div id="chart-customers"></div>
-                    </div>
-                    <div class="col-12 col-xxl-6 ps-xxl-4 pe-xxl-0">
-                        <h2 class="fs-6 fw-normal mb-1 text-gray-400">Temperature (DHT-22)</h2>
-                        <h3 class="fw-extrabold mb-1">32&deg;C</h3>
-                        <small class="d-flex align-items-center">
-                            <svg class="icon icon-xxs text-gray-400 me-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path></svg>
-                            Apr 1 - May 1
-                        </small>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-    <div class="col-md-4">
-        <div class="card border-0 shadow">
-            <div class="card-body">
-                <div class="row d-block d-xxl-flex align-items-center">
-                    <div class="col-12 col-xxl-6 px-xxl-0 mb-3 mb-xxl-0">
-                        <div id="chart-weekly-sales"></div>
-                    </div>
-                    <div class="col-12 col-xxl-6 ps-xxl-4 pe-xxl-0">
-                        <h2 class="fs-6 fw-normal mb-1 text-gray-400">Light Intensity</h2>
-                        <h3 class="fw-extrabold mb-1">1800K</h3>
-                        <small class="d-flex align-items-center">
-                            <svg class="icon icon-xxs text-gray-400 me-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path></svg>
-                            Apr 1 - May 1
-                        </small>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="col-md-4">
-      <div class="card border-0 shadow">
-          <div class="card-body">
-              <div class="row d-block d-xxl-flex align-items-center">
-                  <div class="icon-shape icon-shape-success rounded">
-                      <i class="bi bi-lightbulb-fill card-icon2 "></i>
-                  </div>
-                  <div class="col-12 col-xxl-6 ps-xxl-4 pe-xxl-0 mt-4">
-                      <h2 class="fs-6 fw-normal mb-1 text-gray-400">Light Bulb</h2>
-                      <!-- <h3 class=""></h3> -->
-                      <div class="form-check form-switch fw-extrabold mb-1 h2">
-                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked>
-                        <label class="form-check-label" for="flexSwitchCheckChecked">ON</label>
-                    </div>
-                  </div>
-              </div>
-          </div>
-      </div>
-
-  </div>
 </div>
+
+<div class="card">
+  <div class="table-responsive py-4" id="htmlData" #htmlData>
+    <div class="dataTable-wrapper dataTable-loading no-footer fixed-columns">
+      <table datatable [dtOptions]="dtOptions" class="table table-flush dataTable-table" id="htmlData">
+        <thead class="thead-light">
+        <tr>
+          <th>ID</th>
+          <th>Sensor Name</th>
+          <th>Sensor Column</th>
+          <th>Operation</th>
+          <th>Compared Value</th>
+          <th>Actuator Name</th>
+          <th>Actuator State</th>
+        </tr>
+        </thead>
+        <tbody *ngIf="data?.length != 0">
+        <ng-container *ngFor="let datum of  automationData; let i = index">
+          <tr>
+            <th>{{ datum.id }}</th>
+            <td>{{ datum.sensor_name ?? 'N/A' }}</td>
+            <td>{{ datum.column_name ?? 'N/A' }}</td>
+            <td>{{ fn.comparisonToEnglish(datum.comparison_operation) }}</td>
+            <td>{{ datum.value ?? 'N/A' }}</td>
+            <td>{{ datum.actuator_name ?? 'N/A' }}</td>
+            <td *ngIf="datum.is_switched_on">
+              <div class="badge bg-success">ON</div>
+            </td>
+            <td *ngIf="!datum.is_switched_on">
+              <div class="badge bg-danger">OFF</div>
+            </td>
+          </tr>
+        </ng-container>
+        <tbody *ngIf="data?.length == 0">
+          <tr>
+            <th colspan="3">No data found.</th>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>

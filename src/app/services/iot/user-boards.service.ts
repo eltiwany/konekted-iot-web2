@@ -22,6 +22,15 @@ export class UserBoardsService {
   }
 
   /**
+   * Get user boards for datatable from API
+   * @param void
+   * @returns Promise<any>
+   */
+  async getStats(): Promise<any> {
+    return await this.http.get(this.api.stats, false);
+  }
+
+  /**
    * Get active board from API
    * @param void
    * @returns Promise<any>

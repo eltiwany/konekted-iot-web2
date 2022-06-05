@@ -33,8 +33,10 @@ export class ApiService {
     activateAccount: this.host + 'activate-account',
     register: this.host + 'register',
     logout: this.host + 'logout',
-    refresh: this.host + 'auth/refresh'
+    refresh: this.host + 'auth/refresh',
   }
+
+  stats = this.host + 'stats';
 
   /**
    * Employee Area Api's
