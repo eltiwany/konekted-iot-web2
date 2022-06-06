@@ -1,22 +1,36 @@
 <app-top-bar></app-top-bar>
 
-<div class="row mb-5">
-
-  <!-- Cards with counting summary -->
-  <app-card-md4
-    *ngFor="let datum of data"
-    class="col-md-4"
-    [cardName]="datum[0].name"
-    [cardNumber]="datum[0].value"
-    [iconName]="datum[1].iconName"
-    [bgColor]="datum[1].bgColor"
-    [textColor]="datum[1].textColor"
-    [allDataUrl]="datum[1].allDataUrl"
-  ></app-card-md4>
-
+<div class="card mb-4 shadow">
+  <div class="card-header bg-primary text-white">
+    <h5 class="p-0 m-0 font-weight-750">
+      <i class="bi bi-file-text-fill"></i>
+      Summary
+    </h5>
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <!-- Cards with counting summary -->
+      <app-card-md4
+        *ngFor="let datum of data"
+        class="col-md-4"
+        [cardName]="datum[0].name"
+        [cardNumber]="datum[0].value"
+        [iconName]="datum[1].iconName"
+        [bgColor]="datum[1].bgColor"
+        [textColor]="datum[1].textColor"
+        [allDataUrl]="datum[1].allDataUrl"
+      ></app-card-md4>
+    </div>
+  </div>
 </div>
 
-<div class="card">
+<div class="card mb-4 shadow">
+  <div class="card-header bg-primary text-white">
+    <h5 class="p-0 m-0 font-weight-750">
+      <i class="bi bi-ui-radios"></i>
+      Automations
+    </h5>
+  </div>
   <div class="table-responsive py-4" id="htmlData" #htmlData>
     <div class="dataTable-wrapper dataTable-loading no-footer fixed-columns">
       <table datatable [dtOptions]="dtOptions" class="table table-flush dataTable-table" id="htmlData">

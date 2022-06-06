@@ -1,3 +1,14 @@
+.line1 {
+  color: #ffffff;
+  letter-spacing: -3px;
+  text-shadow: 2px 3px #927000;
+}
+
+.line2 {
+  letter-spacing: -3px;
+  text-shadow: 2px 3px #ffffff;
+}
+
 .bd-placeholder-img {
   font-size: 1.125rem;
   text-anchor: middle;

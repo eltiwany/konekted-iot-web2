@@ -1,6 +1,6 @@
 {
-  "name": "angular-starter-template",
-  "version": "1.0.0",
+  "name": "konekted-iot-web",
+  "version": "1.2",
   "scripts": {
     "ng": "ng",
     "postinstall": "node git-version.js",

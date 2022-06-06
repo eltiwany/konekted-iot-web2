@@ -7,7 +7,7 @@ export class ApiService {
   /**
    * API Enviroment
    */
-  environment: 'prod' | 'dev' = 'dev';
+  environment: 'prod' | 'dev' = 'prod';
 
   /**
    * Base URL for API

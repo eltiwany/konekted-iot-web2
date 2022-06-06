@@ -1,14 +1,14 @@
 <div class="container d-flex align-items-center justify-content-center h-100">
   <div class="g-lg-5 py-5">
     <div class="w-100">
-      <label class="text-center w-100 mb-3">
-        <a routerLink="">
-          <img [src]="config.app.logoUrl" alt="" height="100">
-        </a>
-      </label>
       <div class="card mb-4 rounded-3 mx-auto">
-        <div class="card-header py-3 bg-primary text-white">
-          <h5 class="text-center p-0 m-0">Register your account on {{ config.app.name }}</h5>
+        <div class="card-header py-3 px-5">
+          <label class="text-center w-100 mb-3">
+            <a routerLink="">
+              <img [src]="config.app.logoUrl" alt="" height="100">
+            </a>
+          </label>
+          <h3 class="text-center font-weight-900 p-0 m-0">Register your account on {{ config.app.name }}</h3>
         </div>
         <div class="card-body">
           <form class="p-1" [formGroup]="form" (ngSubmit)="onSubmit()" autocomplete="off">
@@ -84,8 +84,7 @@
               Register Now!
               <i class="bi bi-check-circle"></i>
             </button>
-            <hr class="my-4">
-            <label class="text-muted text-center w-100">Have an account?
+            <label class="text-muted text-center w-100 my-4">Have an account?
               <a routerLink="/login">
                 <u>Login here</u>
               </a>

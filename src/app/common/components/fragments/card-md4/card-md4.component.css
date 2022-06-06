@@ -1,0 +1,7 @@
+.icon-shape {
+  width: 4rem !important;
+  height: 4rem !important;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}

@@ -1,0 +1,30 @@
+<div class="container d-flex align-items-center justify-content-center h-100">
+  <div class="g-lg-5 py-5">
+    <div class="w-100">
+      <div class="card mb-4 rounded-3 mx-auto">
+        <div class="card-header py-3 px-5">
+          <label class="text-center w-100 mb-3">
+            <a routerLink="">
+              <img [src]="config.app.logoUrl" alt="" height="100" />
+            </a>
+          </label>
+          <h3 class="text-center font-weight-900 p-0 m-0">
+            How It Works<br/>
+            <span class="badge bg-info">Connect Devices (LED)</span>
+          </h3>
+        </div>
+        <div class="card-body">
+          <h5 class="mb-3">
+            Now your board is connected to this platform, to connect your devices, login to your account the click on <span class="badge bg-primary">Sensors</span> or <span class="badge bg-primary">Actuators</span> to connect your sensors and actuators!.
+            <br><br>
+            In our LED example, we will connect actuator, go to <span class="badge bg-primary">Actuators</span> > <span class="badge bg-primary">Link Actuator</span>, On Actuator select Bulb, give it a name, and chose a pin that you connected the LED!
+          </h5>
+          <p class="text-center">
+            <img src="./assets/images/how-to/connect.png" class="img-thumbnail" width="500" alt="Turn ON/OFF LED">
+          </p>
+          <a type="button" routerLink="/how-it-works/mnc" class="btn btn-info w-100 mt-4">Final Step: Monitor and Control<i class="bi bi-arrow-right-circle-fill"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,3 +1,4 @@
+import { AuthService } from './../../../../services/auth/auth.service';
 import { BoardStateService } from './../../../../services/iot/board-state.service';
 import { BoardsService } from './../../../../services/iot/boards.service';
 import { PermissionsGuardService } from './../../../../services/guards/permissions-guard.service';
@@ -11,7 +12,7 @@ import { ProviderClass } from '../../modals/provider-class';
   styleUrls: ['./hardware-connection-buttons.component.css']
 })
 export class HardwareConnectionButtonsComponent implements OnInit {
-
+  checkBoard: any;
   dataInjected: any = {};
   // @ts-ignore
   componentConnectBoard: Type<any>;
@@ -36,15 +37,19 @@ export class HardwareConnectionButtonsComponent implements OnInit {
     public modal: ModalsService,
     public permission: PermissionsGuardService,
     public boardState: BoardStateService,
-    private injector: Injector
+    private injector: Injector,
+    private auth: AuthService
   ) { }
 
   ngOnInit(): void {
     this.dataInjected = this.createInjector(this.data);
     this.boardState.getActiveBoard();
-    setInterval(() => {
-      this.boardState.getActiveBoard();
-    }, 30000);
+    if (this.auth.isGuest())
+      clearInterval(this.checkBoard);
+    else
+      this.checkBoard = setInterval(() => {
+        this.boardState.getActiveBoard();
+      }, 30000);
   }
 
   createInjector(dataObj: any) {

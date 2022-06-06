@@ -45,7 +45,7 @@ export class SideNavComponent implements OnInit {
   ];
 
   version = `${VERSION.version}`
-  hash = `${VERSION.hash}`
+  tag = `${VERSION.tag}`
 
   constructor(
     public auth: AuthService,
