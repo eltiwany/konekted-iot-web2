@@ -8,19 +8,21 @@
               <img [src]="config.app.logoUrl" alt="" height="100" />
             </a>
           </label>
-          <h3 class="text-center font-weight-900 p-0 m-0">
+          <h4 class="text-center font-weight-900 p-0 m-0">
             How It Works<br/>
-            <span class="badge bg-info">Login and Link Board</span>
-          </h3>
+            <app-progress-tabs active="link"></app-progress-tabs>
+          </h4>
         </div>
         <div class="card-body">
-          <h5 class="mb-3">
-            In this example we are using <span class="badge bg-danger">NodeMCU ESP8266 Board</span>, we need to link it to our account, first login to your account then go to <span class="badge bg-primary">Boards</span> > <span class="badge bg-primary">Link Board</span> > <span class="badge bg-primary">NodeMCU ESP8266</span> and take note/copy <span class="badge bg-danger">Token</span> generated for next step.
-          </h5>
           <p class="text-center">
             <img src="./assets/images/how-to/link-board.png" class="img-thumbnail" width="500" alt="Turn ON/OFF LED">
           </p>
-          <a type="button" routerLink="/how-it-works/library" class="btn btn-info w-100 mt-4">Next Step: Download Konekted Library and Upload <i class="bi bi-arrow-right-circle-fill"></i></a>
+          <p class="text-center mt-3">
+            In this example we are using <span class="badge bg-danger">NodeMCU ESP8266 Board</span>, we need to link it to our account, first login to your account then go to <span class="badge bg-primary">Boards</span> > <span class="badge bg-primary">Link Board</span> > <span class="badge bg-primary">NodeMCU ESP8266</span> and take note/copy <span class="badge bg-danger">Token</span> generated for next step.
+          </p>
+          <p class="text-center">
+            <a type="button" routerLink="/how-it-works/library" class="btn btn-info mt-4">Next Step: Download Konekted Library and Upload <i class="bi bi-arrow-right-circle-fill"></i></a>
+          </p>
         </div>
       </div>
     </div>

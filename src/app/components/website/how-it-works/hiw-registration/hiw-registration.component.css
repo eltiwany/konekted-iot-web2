@@ -1,0 +1,6 @@
+@media (max-width: 480px) {
+  .h-100 {
+    height: auto !important;
+    margin-top: 10px;
+  }
+}

@@ -26,6 +26,12 @@
   animation: fadeIn 1 1s ease-out;
 }
 
+@media (max-width: 480px) {
+  .main-guest {
+    overflow-y: scroll !important;
+  }
+}
+
 button{
 position: absolute;
 border: 2px solid white;

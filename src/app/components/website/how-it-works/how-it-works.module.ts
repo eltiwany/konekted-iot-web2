@@ -8,6 +8,7 @@ import { HiwLinkBoardComponent } from './hiw-link-board/hiw-link-board.component
 import { HiwLibraryComponent } from './hiw-library/hiw-library.component';
 import { HiwConnectComponent } from './hiw-connect/hiw-connect.component';
 import { HiwMncComponent } from './hiw-mnc/hiw-mnc.component';
+import { ProgressTabsComponent } from './progress-tabs/progress-tabs.component';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { HiwMncComponent } from './hiw-mnc/hiw-mnc.component';
     HiwLinkBoardComponent,
     HiwLibraryComponent,
     HiwConnectComponent,
-    HiwMncComponent
+    HiwMncComponent,
+    ProgressTabsComponent
   ],
   imports: [
     CommonModule,
