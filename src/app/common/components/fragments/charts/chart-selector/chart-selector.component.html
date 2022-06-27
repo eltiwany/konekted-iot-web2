@@ -1,8 +1,9 @@
 <div class="row mt-2">
   <div class="col-12">
       <div class="card border-0 shadow">
-          <div class="card-header border-bottom text-center bg-dark text-white">
-              <h2 class="fs-5 fw-bold mb-0 ">{{ sensors?.user_defined_name ?? sensors?.name }}</h2>
+          <div class="card-header border-bottom bg-dark">
+              <h2 class="fs-5 fw-bold mb-0 float-left text-white">{{ sensors?.user_defined_name ?? sensors?.name }}</h2>
+              <h2 class="fs-5 fw-bolder mb-0 badge bg-warning float-right text-dark">{{ columns[0]?.name + ": " + columns[0]?.data?.[0] + fn.getSIUnit(columns[0]?.name) }}</h2>
           </div>
           <div class="card-body">
             <ng-container *ngIf="columns">

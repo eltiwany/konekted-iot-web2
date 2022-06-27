@@ -125,4 +125,15 @@ export class FunctionsService {
   getColumnNames(columns: any[]) {
     return columns.reduce((acc, curr, index) => acc + curr.name + (columns.length - 1 == index ? "" :", "), "")
   }
+
+  getSIUnit(name: string): string {
+    switch(name) {
+      case "DIST":
+        return "cm"
+      case "LIGHT":
+        return "cd"
+      default:
+        return ""
+    }
+  }
 }

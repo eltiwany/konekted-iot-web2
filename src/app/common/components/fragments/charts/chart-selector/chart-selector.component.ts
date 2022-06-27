@@ -1,3 +1,4 @@
+import { FunctionsService } from './../../../../services/extras/functions.service';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Component, Input, OnInit } from '@angular/core';
 
@@ -16,7 +17,9 @@ export class ChartSelectorComponent implements OnInit {
     'chartOption': new FormControl('line'),
   });
 
-  constructor() { }
+  constructor(
+    public fn: FunctionsService
+  ) { }
 
   get chartOption() {
     return this.form.get('chartOption');
