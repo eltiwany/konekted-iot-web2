@@ -20,16 +20,19 @@ export class ControlDeviceCardComponent implements OnInit {
   @Input() deviceName: string = "Device Name";
   @Input() deviceId: number = 0;
   @Input() isSwitchedOn: boolean = false;
+  @Input() isActiveLow: boolean = false;
 
   onChecked(input: any, id: number, fromDiv = false) {
     // console.log(input.target.value, input.target.checked, id);
     if (fromDiv)
       input.target.checked = !input.target.checked;
-    this.checked[id] = this.isSwitchedOn = input.target.checked;
+    this.checked[id] = this.isSwitchedOn = this.isActiveLow ? !input.target.checked : input.target.checked;
+
     let data = {
       'userActuatorId': id,
-      'isSwitchedOn': input.target.checked,
+      'isSwitchedOn': this.isActiveLow ? !input.target.checked : input.target.checked,
     }
+    console.log(input.target.value, this.isSwitchedOn, this.isActiveLow, !this.isSwitchedOn && this.isActiveLow);
     this.actuatorsService.switchActuator(data).then((response) => {
       if(response.error) {
         this.checked[id] = !this.checked[id];
@@ -45,5 +48,7 @@ export class ControlDeviceCardComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    // console.log(this.isSwitchedOn, this.isActiveLow, (!this.isSwitchedOn && this.isActiveLow), (this.isSwitchedOn && !this.isActiveLow), "=>", (!this.isSwitchedOn && this.isActiveLow) || (this.isSwitchedOn && !this.isActiveLow));
+
   }
 }

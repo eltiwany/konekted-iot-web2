@@ -28,6 +28,7 @@ export class HardwareListCardComponent implements OnInit {
   @Input() linkMessage: string = "Click the \"plus\" icon to link a device.";
 
   @Input() deviceName: string = "Device Name";
+  @Input() isActiveLow: boolean = false;
   @Input() token: string = "";
   @Input() interval: string = "";
 

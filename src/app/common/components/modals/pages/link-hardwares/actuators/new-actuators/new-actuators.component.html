@@ -28,7 +28,16 @@
           <label for="floatingname">Name</label>
           <p class="text-danger font-weight-bold p-0 m-0" *ngIf="name?.touched && name?.invalid">{{ name?.errors?.message }}</p>
         </div>
-        
+
+        <!-- Is Actuator Active Low? -->
+        <div class="form-check form-switch mb-3">
+          <input class="form-check-input" formControlName="isActiveLow" type="checkbox" id="isActiveLow">
+          <label class="form-check-label" for="isActiveLow">
+            Is Actuator Active Low?<br>
+            (Check this if actuator is operating on GND instead of VCC)
+          </label>
+        </div>
+
         <h6 class="font-weight-750 m-0">Connect {{ datum[0].actuator?.name }} actuator with {{ activeBoard.board?.name }} board</h6>
         <div class="row clear-both" *ngFor="let row of rows; let i = index">
           <div class="col col-md-6">

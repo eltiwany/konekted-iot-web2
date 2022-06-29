@@ -136,3 +136,10 @@
   transform-origin: 0 50%;
   z-index: -1;
 }
+
+.active-low {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  padding: 0.2rem 0.4rem;
+}

@@ -6,7 +6,8 @@
           <div
             class="col-12 text-center align-items-center justify-content-center"
           >
-            <label [for]="'toggle' + deviceId" class="pointer icon-shape icon-shape-{{ (checked[deviceId] || isSwitchedOn) ? 'success' : 'primary' }} rounded rounded-bottom-0">
+            <label [for]="'toggle' + deviceId" class="pointer icon-shape icon-shape-{{ (isSwitchedOn && !isActiveLow) || (!isSwitchedOn && isActiveLow) ? 'success' : 'primary' }} rounded rounded-bottom-0">
+              <span *ngIf="isActiveLow" class="badge bg-warning active-low">AL</span>
               <div>
                 <i
                   *ngIf="!isImage"
@@ -17,7 +18,7 @@
             </label>
           </div>
 
-          <div [class]="((checked[deviceId] || isSwitchedOn) ? 'bg-green' : 'bg-gray') + ' switch rounded rounded-top-0 p-5'">
+          <div [class]="(((isSwitchedOn && !isActiveLow) || (!isSwitchedOn && isActiveLow)) ? 'bg-green' : 'bg-gray') + ' switch rounded rounded-top-0 p-5'">
             <h1 class="fw-extrabold mb-2 text-center mb-4">{{ deviceName }}</h1>
 
             <div class="toggle-div">
@@ -27,7 +28,7 @@
                 type="checkbox"
                 role="switch"
                 name="toggle"
-                [defaultChecked]="(checked[deviceId] || isSwitchedOn)"
+                [defaultChecked]="((isSwitchedOn && !isActiveLow) || (!isSwitchedOn && isActiveLow))"
                 value="on"
                 (change)="onChecked($event, deviceId)"
               />

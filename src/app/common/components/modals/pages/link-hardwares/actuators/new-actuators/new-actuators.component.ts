@@ -35,6 +35,7 @@ export class NewActuatorsComponent implements OnInit {
   form = new FormGroup({
     'actuatorId': new FormControl('', [GeneralValidators.required]),
     'name': new FormControl('', [GeneralValidators.required]),
+    'isActiveLow': new FormControl(false),
   });
 
   get actuatorId() {
@@ -43,6 +44,10 @@ export class NewActuatorsComponent implements OnInit {
 
   get name() {
     return this.form.get('name');
+  }
+
+  get isActiveLow() {
+    return this.form.get('isActiveLow');
   }
 
   ngOnInit(): void {
@@ -107,6 +112,7 @@ export class NewActuatorsComponent implements OnInit {
     const data = {
       actuatorId: this.actuatorId?.value,
       name: this.name?.value,
+      isActiveLow: this.isActiveLow?.value,
       userBoardId: this.activeBoard.board.id,
       connections: this.connections
     };
