@@ -115,7 +115,15 @@ export class EditAutomationsComponent implements OnInit {
         this.userActuators = response.data;
     }).finally(
       // () => console.log(this.userActuators)
+      () => { this.setUserActuator(this.userActuator?.value) }
     );
+  }
+
+  setUserActuator(userActuatorId: number) {
+    let userActuatorTmp = this.userActuators.filter((userActuator) => userActuator.actuator.id == userActuatorId);
+    // console.log(userActuatorTmp[0]);
+    this.form.setControl('userActuator', new FormControl({value: userActuatorTmp[0], disabled: true}, [GeneralValidators.required, GeneralValidators.isNot(this.selectors.userActuator)]));
+
   }
 
   onSubmit = (): void => {
@@ -124,7 +132,8 @@ export class EditAutomationsComponent implements OnInit {
       sensorColumnId: this.sensorColumn?.value,
       comparisonOperation: this.comparisonOperation?.value,
       value: this.value?.value,
-      userActuatorId: this.userActuator?.value,
+      // userActuatorId: this.userActuator?.value,
+      userActuatorId: this.userActuator?.value.actuator.id,
       isSwitchedOn: this.isSwitchedOn?.value,
     };
     // console.log(data);

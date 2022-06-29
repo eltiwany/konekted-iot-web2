@@ -32,11 +32,13 @@
             <td>{{ datum.column_name ?? 'N/A' }}</td>
             <td>{{ fn.comparisonToEnglish(datum.comparison_operation) }}</td>
             <td>{{ datum.value ?? 'N/A' }}</td>
-            <td>{{ datum.actuator_name ?? 'N/A' }}</td>
-            <td *ngIf="datum.is_switched_on">
+            <td>{{ datum.actuator_name ?? 'N/A' }}
+              <span *ngIf="datum.is_active_low" class="badge bg-warning">AL</span>
+            </td>
+            <td *ngIf="(datum.is_switched_on && !datum.is_active_low) || (!datum.is_switched_on && datum.is_active_low)">
               <div class="badge bg-success">ON</div>
             </td>
-            <td *ngIf="!datum.is_switched_on">
+            <td *ngIf="(!datum.is_switched_on && !datum.is_active_low) || (datum.is_switched_on && datum.is_active_low)">
               <div class="badge bg-danger">OFF</div>
             </td>
             <td>

@@ -102,7 +102,7 @@
             placeholder="Actuator"
           >
             <option [value]="">{{ selectors.userActuator }}</option>
-            <option *ngFor="let userActuator of userActuators" [ngValue]="userActuator.actuator.id">
+            <option *ngFor="let userActuator of userActuators" [ngValue]="userActuator">
               {{ userActuator.actuator.user_defined_name ?? userActuator.actuator.name }}
             </option>
           </select>
@@ -122,8 +122,8 @@
             id="floatingSwitch"
             placeholder="Switch"
           >
-            <option [value]="1">ON</option>
-            <option [value]="0">OFF</option>
+            <option [value]="userActuator?.value.actuator?.is_active_low ? 0 : 1">ON</option>
+            <option [value]="userActuator?.value.actuator?.is_active_low ? 1 : 0">OFF</option>
           </select>
           <label for="floatingSwitch">Switch ON/OFF</label>
           <p class="text-danger font-weight-bold p-0 m-0" *ngIf="isSwitchedOn?.touched && isSwitchedOn?.invalid">{{ isSwitchedOn?.errors?.message }}</p>
